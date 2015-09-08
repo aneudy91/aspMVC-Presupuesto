@@ -6,7 +6,7 @@
     <br />
     <div>   
          Seleccione un proyecto:<br />    
-        <asp:DropDownList ID="DDLProyectos" runat="server" Height="52px" Width="469px" OnSelectedIndexChanged="DDLProyectos_SelectedIndexChanged"></asp:DropDownList>
+        <asp:DropDownList ID="DDLProyectos" runat="server" Height="52px" Width="469px" OnSelectedIndexChanged="DDLProyectos_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
          <br />
         <div>
          <span class="inicio">

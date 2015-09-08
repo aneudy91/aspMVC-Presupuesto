@@ -70,6 +70,7 @@ namespace Presupuestos.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             TblProyecto tblproyecto = db.TblProyectos.Find(id);
             if (tblproyecto == null)
             {
@@ -124,6 +125,18 @@ namespace Presupuestos.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult ActualizaDetalleProyecto(int id) 
+        {
+             dbPresupuestosEntities db = new dbPresupuestosEntities();
+
+             if (id == null)
+                 return HttpNotFound();
+
+             db.spCrearDetallePeriodo(id);
+
+             return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

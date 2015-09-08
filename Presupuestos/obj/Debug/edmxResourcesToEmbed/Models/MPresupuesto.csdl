@@ -52,6 +52,9 @@
       <End Role="TblEstatu" EntitySet="TblEstatus" />
       <End Role="TblProyecto" EntitySet="TblProyectos" />
     </AssociationSet>
+    <FunctionImport Name="spCrearDetallePeriodo">
+      <Parameter Name="IDProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="TblCliente">
     <Key>

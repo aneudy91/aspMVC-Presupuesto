@@ -142,6 +142,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spCrearDetallePeriodo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDProyecto" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="dbPresupuestosModelStoreContainer">
           <EntitySet Name="TblClientes" EntityType="Self.TblClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblConceptos" EntityType="Self.TblConceptos" Schema="dbo" store:Type="Tables" />
@@ -224,6 +227,9 @@
             <End Role="TblEstatu" EntitySet="TblEstatus" />
             <End Role="TblProyecto" EntitySet="TblProyectos" />
           </AssociationSet>
+          <FunctionImport Name="spCrearDetallePeriodo">
+            <Parameter Name="IDProyecto" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="TblCliente">
           <Key>
@@ -440,6 +446,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spCrearDetallePeriodo" FunctionName="dbPresupuestosModel.Store.spCrearDetallePeriodo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

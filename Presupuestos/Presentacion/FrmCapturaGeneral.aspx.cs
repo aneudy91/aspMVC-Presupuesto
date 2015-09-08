@@ -103,18 +103,18 @@ namespace Presupuestos.Presentacion
 
         protected void GridData_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            //GridViewRow row = (GridViewRow)GridData.Rows[e.RowIndex];
+            GridViewRow row = (GridViewRow)GridData.Rows[e.RowIndex];
 
-            //for (int i = 3; i <= row.Cells.Count - 1; i++)
-            //{
-            //    // TextBox tb = (TextBox)row.Cells[2].Controls[0];
-            //    //  Response.Write(row.Cells[0].Text);
-            //    TextBox cap = (TextBox)row.Cells[i].Controls[0];
-            //    dc.ActualizaDetallePeriodo(CBTiposNomina.SelectedValue, GridData.Columns[i].HeaderText, row.Cells[1].Text, Convert.ToDecimal(cap.Text), 0, 0);
-            //}
+            for (int i = 3; i <= row.Cells.Count - 1; i++)
+            {
+                // TextBox tb = (TextBox)row.Cells[2].Controls[0];
+                //  Response.Write(row.Cells[0].Text);
+                TextBox cap = (TextBox)row.Cells[i].Controls[0];
+                dc.ActualizarDetallePeriodo(Int32.Parse( DDLProyectos.SelectedValue), GridData.Columns[i].HeaderText, Int32.Parse(row.Cells[1].Text), Convert.ToDecimal(cap.Text));
+            }
 
-            //GridData.EditIndex = -1;
-            //gvBind();
+            GridData.EditIndex = -1;
+            gvBind();
         }
 
         protected void GridData_RowDataBound1(object sender, GridViewRowEventArgs e)

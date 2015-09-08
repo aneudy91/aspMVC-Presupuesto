@@ -137,6 +137,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="spCrearDetallePeriodo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDProyecto" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="dbPresupuestosModelStoreContainer">
     <EntitySet Name="TblClientes" EntityType="Self.TblClientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblConceptos" EntityType="Self.TblConceptos" Schema="dbo" store:Type="Tables" />

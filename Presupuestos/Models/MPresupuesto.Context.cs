@@ -12,6 +12,8 @@ namespace Presupuestos.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class dbPresupuestosEntities : DbContext
     {
@@ -33,5 +35,14 @@ namespace Presupuestos.Models
         public virtual DbSet<TblProyecto> TblProyectos { get; set; }
         public virtual DbSet<TblProyectosEmpleado> TblProyectosEmpleados { get; set; }
         public virtual DbSet<TblEstatu> TblEstatus { get; set; }
+    
+        public virtual int spCrearDetallePeriodo(Nullable<int> iDProyecto)
+        {
+            var iDProyectoParameter = iDProyecto.HasValue ?
+                new ObjectParameter("IDProyecto", iDProyecto) :
+                new ObjectParameter("IDProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCrearDetallePeriodo", iDProyectoParameter);
+        }
     }
 }

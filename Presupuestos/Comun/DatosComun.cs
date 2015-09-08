@@ -84,5 +84,33 @@ namespace Presupuestos.Datos
                 con.Dispose();
             }
         }
+
+        public int ActualizarDetallePeriodo(int IDProyecto,string Concepto,int IDEmpleado, decimal Cap1)
+        {
+            List<DbParameter> parametros = new List<DbParameter>();
+
+            DbParameter param = DatosComun.dpf.CreateParameter();
+            param.Value = IDProyecto;
+            param.ParameterName = "IDProyecto";
+            parametros.Add(param);
+
+            DbParameter param1 = DatosComun.dpf.CreateParameter();
+            param1.Value = Concepto;
+            param1.ParameterName = "Concepto";
+            parametros.Add(param1);
+
+            DbParameter param2 = DatosComun.dpf.CreateParameter();
+            param2.Value = IDEmpleado;
+            param2.ParameterName = "IDEmpleado";
+            parametros.Add(param2);
+
+            DbParameter param3 = DatosComun.dpf.CreateParameter();
+            param3.Value = Cap1;
+            param3.ParameterName = "Cap1";
+            parametros.Add(param3);
+
+
+            return DatosComun.ejecutarNonQuery("spActualizarDetalleProyecto", parametros);
+        }
     }
 }
