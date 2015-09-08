@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Presupuestos.Models.TblEmpleado>
+
+@{
+    ViewBag.Title = "Lista de Colaboradores";
+}
+
+<h2>Lista de Colaboradores</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Colaborador", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Paterno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Materno)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Paterno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Materno)
+        </td>
+        <td>
+            @Html.ActionLink("Modificar", "Edit", new { id=item.IDEmpleado }) |
+            @Html.ActionLink("Detalle", "Details", new { id=item.IDEmpleado }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IDEmpleado })
+        </td>
+    </tr>
+}
+
+</table>

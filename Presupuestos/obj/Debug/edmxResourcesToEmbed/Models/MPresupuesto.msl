@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbPresupuestosModelStoreContainer" CdmEntityContainer="dbPresupuestosEntities">
+    <EntitySetMapping Name="TblEmpresas">
+      <EntityTypeMapping TypeName="dbPresupuestosModel.TblEmpresa">
+        <MappingFragment StoreEntitySet="TblEmpresa">
+          <ScalarProperty Name="IDEmpresa" ColumnName="IDEmpresa" />
+          <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="RFC" ColumnName="RFC" />
+          <ScalarProperty Name="DomicilioFiscal_calle" ColumnName="DomicilioFiscal_calle" />
+          <ScalarProperty Name="DomicilioFiscal_noExterior" ColumnName="DomicilioFiscal_noExterior" />
+          <ScalarProperty Name="DomicilioFiscal_colonia" ColumnName="DomicilioFiscal_colonia" />
+          <ScalarProperty Name="DomicilioFiscal_localidad" ColumnName="DomicilioFiscal_localidad" />
+          <ScalarProperty Name="DomicilioFiscal_municipio" ColumnName="DomicilioFiscal_municipio" />
+          <ScalarProperty Name="DomicilioFiscal_estado" ColumnName="DomicilioFiscal_estado" />
+          <ScalarProperty Name="DomicilioFiscal_pais" ColumnName="DomicilioFiscal_pais" />
+          <ScalarProperty Name="DomicilioFiscal_codigoPostal" ColumnName="DomicilioFiscal_codigoPostal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblUsuarios">
+      <EntityTypeMapping TypeName="dbPresupuestosModel.TblUsuario">
+        <MappingFragment StoreEntitySet="TblUsuarios">
+          <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="NombreCuenta" ColumnName="NombreCuenta" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblClientes">
+      <EntityTypeMapping TypeName="dbPresupuestosModel.TblCliente">
+        <MappingFragment StoreEntitySet="TblClientes">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="RFC" ColumnName="RFC" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+          <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblEmpleados">
+      <EntityTypeMapping TypeName="dbPresupuestosModel.TblEmpleado">
+        <MappingFragment StoreEntitySet="TblEmpleados">
+          <ScalarProperty Name="Materno" ColumnName="Materno" />
+          <ScalarProperty Name="Paterno" ColumnName="Paterno" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IDEmpleado" ColumnName="IDEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblConceptos">
+      <EntityTypeMapping TypeName="dbPresupuestosModel.TblConcepto">
+        <MappingFragment StoreEntitySet="TblConceptos">
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="OrdenInsert" ColumnName="OrdenInsert" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IDConcepto" ColumnName="IDConcepto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblProyectos">
+      <EntityTypeMapping TypeName="dbPresupuestosModel.TblProyecto">
+        <MappingFragment StoreEntitySet="TblProyectos">
+          <ScalarProperty Name="IDEstatus" ColumnName="IDEstatus" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+          <ScalarProperty Name="IDProyecto" ColumnName="IDProyecto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblProyectosEmpleados">
+      <EntityTypeMapping TypeName="dbPresupuestosModel.TblProyectosEmpleado">
+        <MappingFragment StoreEntitySet="TblProyectosEmpleados">
+          <ScalarProperty Name="IDEmpleado" ColumnName="IDEmpleado" />
+          <ScalarProperty Name="IDProyecto" ColumnName="IDProyecto" />
+          <ScalarProperty Name="IDProyectoEmpleado" ColumnName="IDProyectoEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblEstatus">
+      <EntityTypeMapping TypeName="dbPresupuestosModel.TblEstatu">
+        <MappingFragment StoreEntitySet="TblEstatus">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IDEstatus" ColumnName="IDEstatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

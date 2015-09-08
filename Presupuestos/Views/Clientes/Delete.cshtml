@@ -1,0 +1,58 @@
+﻿@model Presupuestos.Models.TblCliente
+
+@{
+    ViewBag.Title = "Eliminar un Cliente";
+}
+
+<h2>Eliminar un Cliente</h2>
+
+<h3>¿Confirma que desea eliminar este cliente?</h3>
+<div>
+    @*<h4>TblCliente</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.NombreComercial)*@
+            <b>Nombre Comercial</b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreComercial)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.RazonSocial)*@
+            <b>Razón Social</b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RazonSocial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RFC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RFC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la Lista", "Index")
+        </div>
+    }
+</div>

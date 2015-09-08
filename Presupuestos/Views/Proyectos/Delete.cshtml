@@ -1,0 +1,80 @@
+﻿@model Presupuestos.Models.TblProyecto
+
+@{
+    ViewBag.Title = "Eliminar proyecto";
+}
+
+<h2>Eliminar Proyecto</h2>
+
+<h3>¿Confirma que desea eliminar este proyecto?</h3>
+<div>
+    @*<h4>TblProyecto</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Decripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Decripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TblCliente.NombreComercial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TblCliente.NombreComercial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TblEstatu.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TblEstatu.Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+    }
+</div>

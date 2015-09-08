@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbPresupuestosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TblClientes">
+    <Key>
+      <PropertyRef Name="IDCliente" />
+    </Key>
+    <Property Name="IDCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreComercial" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="RazonSocial" Type="varchar" MaxLength="255" />
+    <Property Name="RFC" Type="varchar" MaxLength="20" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="TblConceptos">
+    <Key>
+      <PropertyRef Name="IDConcepto" />
+    </Key>
+    <Property Name="IDConcepto" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="OrdenInsert" Type="int" Nullable="false" />
+    <Property Name="Tipo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TblEmpleados">
+    <Key>
+      <PropertyRef Name="IDEmpleado" />
+    </Key>
+    <Property Name="IDEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Paterno" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Materno" Type="varchar" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="TblEmpresa">
+    <Key>
+      <PropertyRef Name="IDEmpresa" />
+    </Key>
+    <Property Name="IDEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreComercial" Type="varchar" MaxLength="300" />
+    <Property Name="RazonSocial" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="RFC" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DomicilioFiscal_calle" Type="varchar" MaxLength="500" />
+    <Property Name="DomicilioFiscal_noExterior" Type="varchar" MaxLength="100" />
+    <Property Name="DomicilioFiscal_colonia" Type="varchar" MaxLength="500" />
+    <Property Name="DomicilioFiscal_localidad" Type="varchar" MaxLength="500" />
+    <Property Name="DomicilioFiscal_municipio" Type="varchar" MaxLength="500" />
+    <Property Name="DomicilioFiscal_estado" Type="varchar" MaxLength="500" />
+    <Property Name="DomicilioFiscal_pais" Type="varchar" MaxLength="500" />
+    <Property Name="DomicilioFiscal_codigoPostal" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TblEstatus">
+    <Key>
+      <PropertyRef Name="IDEstatus" />
+    </Key>
+    <Property Name="IDEstatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TblProyectos">
+    <Key>
+      <PropertyRef Name="IDProyecto" />
+    </Key>
+    <Property Name="IDProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCliente" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Decripcion" Type="varchar" MaxLength="1000" />
+    <Property Name="FechaInicio" Type="date" />
+    <Property Name="FechaFin" Type="date" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IDEstatus" Type="int" />
+  </EntityType>
+  <EntityType Name="TblProyectosEmpleados">
+    <Key>
+      <PropertyRef Name="IDProyectoEmpleado" />
+    </Key>
+    <Property Name="IDProyectoEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDProyecto" Type="int" />
+    <Property Name="IDEmpleado" Type="int" />
+  </EntityType>
+  <EntityType Name="TblUsuarios">
+    <Key>
+      <PropertyRef Name="IDUsuario" />
+    </Key>
+    <Property Name="IDUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="NombreCuenta" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Clave" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <Association Name="fk_TblProyectos_IDCliente">
+    <End Role="TblClientes" Type="Self.TblClientes" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TblProyectos" Type="Self.TblProyectos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblClientes">
+        <PropertyRef Name="IDCliente" />
+      </Principal>
+      <Dependent Role="TblProyectos">
+        <PropertyRef Name="IDCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_TblProyectos_IDEstatus">
+    <End Role="TblEstatus" Type="Self.TblEstatus" Multiplicity="0..1" />
+    <End Role="TblProyectos" Type="Self.TblProyectos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblEstatus">
+        <PropertyRef Name="IDEstatus" />
+      </Principal>
+      <Dependent Role="TblProyectos">
+        <PropertyRef Name="IDEstatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_TblProyectosEmpleados_IDEmpleado">
+    <End Role="TblEmpleados" Type="Self.TblEmpleados" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TblProyectosEmpleados" Type="Self.TblProyectosEmpleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblEmpleados">
+        <PropertyRef Name="IDEmpleado" />
+      </Principal>
+      <Dependent Role="TblProyectosEmpleados">
+        <PropertyRef Name="IDEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_TblProyectosEmpleados_IDProyecto">
+    <End Role="TblProyectos" Type="Self.TblProyectos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TblProyectosEmpleados" Type="Self.TblProyectosEmpleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblProyectos">
+        <PropertyRef Name="IDProyecto" />
+      </Principal>
+      <Dependent Role="TblProyectosEmpleados">
+        <PropertyRef Name="IDProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbPresupuestosModelStoreContainer">
+    <EntitySet Name="TblClientes" EntityType="Self.TblClientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblConceptos" EntityType="Self.TblConceptos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblEmpleados" EntityType="Self.TblEmpleados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblEmpresa" EntityType="Self.TblEmpresa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblEstatus" EntityType="Self.TblEstatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblProyectos" EntityType="Self.TblProyectos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblProyectosEmpleados" EntityType="Self.TblProyectosEmpleados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblUsuarios" EntityType="Self.TblUsuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_TblProyectos_IDCliente" Association="Self.fk_TblProyectos_IDCliente">
+      <End Role="TblClientes" EntitySet="TblClientes" />
+      <End Role="TblProyectos" EntitySet="TblProyectos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_TblProyectos_IDEstatus" Association="Self.fk_TblProyectos_IDEstatus">
+      <End Role="TblEstatus" EntitySet="TblEstatus" />
+      <End Role="TblProyectos" EntitySet="TblProyectos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_TblProyectosEmpleados_IDEmpleado" Association="Self.fk_TblProyectosEmpleados_IDEmpleado">
+      <End Role="TblEmpleados" EntitySet="TblEmpleados" />
+      <End Role="TblProyectosEmpleados" EntitySet="TblProyectosEmpleados" />
+    </AssociationSet>
+    <AssociationSet Name="fk_TblProyectosEmpleados_IDProyecto" Association="Self.fk_TblProyectosEmpleados_IDProyecto">
+      <End Role="TblProyectos" EntitySet="TblProyectos" />
+      <End Role="TblProyectosEmpleados" EntitySet="TblProyectosEmpleados" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

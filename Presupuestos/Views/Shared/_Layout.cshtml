@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Presupuestos", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Clientes<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="~/Clientes/Index">Catálogo de Clientes</a></li>
+                            <li class="divider"></li>
+                            <li><a href="~/Clientes/Create">Nuevos Clientes</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Colaboradores<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="~/Empleados/Index">Empleados</a></li>
+                            <li class="divider"></li>
+                            <li><a href="~/Empleados/Create">Nuevos Empleado</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Conceptos<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="~/Conceptos/Index">Catálogo de Conceptos</a></li>
+                            <li class="divider"></li>
+                            <li><a href="~/Conceptos/Create">Nuevos Conceptos</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Proyectos<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="~/Proyectos/Index">Proyectos</a></li>
+                            <li class="divider"></li>
+                            <li><a href="~/Proyectos/Create">Nuevos Proyectos</a></li>
+                            <li class="divider"></li>     
+                            <li><a href="~/EmpleadoProyecto/Create">Agregar Colaboradores a Proyectos</a></li>
+                            <li class="divider"></li>     
+                            <li><a href="~/Estatus/Index">Catálogo de Estatus de Proyectos</a></li>
+                            <li class="divider"></li>
+                            <li><a href="~/Presentacion/FrmCapturaGeneral">Captura de conceptos</a></li>
+                       </ul>                                                         
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Empresa<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="~/Empresa/Index">Empresa</a></li>
+                            <li class="divider"></li>
+                        
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="~/Presentacion/FrmCerrarSession.aspx">@HttpContext.Current.Session["Nombre"] Salir</a>
+                    </li>
+
+                 </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+</body>
+</html>

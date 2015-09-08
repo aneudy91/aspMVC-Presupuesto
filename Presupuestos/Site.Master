@@ -1,0 +1,143 @@
+﻿<%@ master language="C#" autoeventwireup="true" codebehind="Site.master.cs" inherits="Presupuestos.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" runat="server" href="~/">Presupuestos</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/Presentacion/FrmHome">Home</a></li>
+
+
+                        <%
+                            if ((string)Session["Nombre"] != null)
+                            {
+                                Response.Write("<li class=\"dropdown\"> " +
+                                " <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Clientes<span class=\"caret\"></span></a> " +
+                                " <ul class=\"dropdown-menu\" role=\"menu\"> " +
+                                "  <li><a href=\"../Clientes/Index\">Catálogo de Clientes</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                "  <li><a href=\"../Clientes/Create\">Nuevo Cliente</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                " </ul> " +
+                                " </li>");
+
+                                Response.Write("<li class=\"dropdown\"> " +
+                                " <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Colaboradores<span class=\"caret\"></span></a> " +
+                                " <ul class=\"dropdown-menu\" role=\"menu\"> " +
+                                "  <li><a href=\"../Empleados/Index\">Empleados</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                "  <li><a href=\"../Empleados/Create\">Nuevo Empleado</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                " </ul> " +
+                                " </li>");
+
+                                Response.Write("<li class=\"dropdown\"> " +
+                                " <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Conceptos<span class=\"caret\"></span></a> " +
+                                " <ul class=\"dropdown-menu\" role=\"menu\"> " +
+                                "  <li><a href=\"../Conceptos/Index\">Catálogo de Conceptos</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                "  <li><a href=\"../Conceptos/Create\">Nuevo Concepto</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                " </ul> " +
+                                " </li>");
+
+                                Response.Write("<li class=\"dropdown\"> " +
+                                " <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Proyectos<span class=\"caret\"></span></a> " +
+                                " <ul class=\"dropdown-menu\" role=\"menu\"> " +
+                                "  <li><a href=\"../Proyectos/Index\">Catálogo de Proyectos</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                "  <li><a href=\"../Proyectos/Create\">Nuevo Proyecto</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                "  <li><a href=\"../EmpleadoProyecto/Create\">Agregar Colaboradores a Proyectos</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                "  <li><a href=\"../Estatus/Index\">Catálogo de Estatus de Proyectos</a></li> " +
+                                "   <li class=\"divider\"></li> " +
+                                "  <li><a href=\"../Presentacion/FrmCapturaGeneral\">Captura de conceptos</a></li> " +
+                                " </ul> " +
+                                " </li>");
+
+                                                                              
+                                Response.Write("<li class=\"dropdown\"> " +
+                               " <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Empresa<span class=\"caret\"></span></a> " +
+                               " <ul class=\"dropdown-menu\" role=\"menu\"> " +
+                               "  <li><a href=\"../Empresa/Index\">Empresa</a></li> " +
+                               "   <li class=\"divider\"></li> " +
+                               " </ul> " +
+                               " </li>");                                
+                            } 
+                            
+                        %>
+
+
+                        <li><a runat="server" href="~/About">Sobre Nosotros</a></li>
+                        <li><a runat="server" href="~/Contact">Contáctanos</a></li>
+
+
+                        
+                      <% 
+                          if ((string)Session["Nombre"] != null) {                         
+                            Response.Write("<li><a runat=\"server\" href=\"../Presentacion/FrmCerrarSession.aspx\">Hola "+ (string)Session["Nombre"] + " Salir</a></li>"); 
+                            } 
+                       %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Desarrollada por a2bSystem</p>
+            </footer>
+        </div>
+
+    </form>
+</body>
+</html>

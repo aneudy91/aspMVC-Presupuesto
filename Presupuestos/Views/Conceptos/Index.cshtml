@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Presupuestos.Models.TblConcepto>
+
+@{
+    ViewBag.Title = "Lista de Conceptos";
+}
+
+<h2>Lista de Conceptos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Concepto", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenInsert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenInsert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.ActionLink("Modificar", "Edit", new { id=item.IDConcepto }) |
+            @Html.ActionLink("Detalle", "Details", new { id=item.IDConcepto }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IDConcepto })
+        </td>
+    </tr>
+}
+
+</table>

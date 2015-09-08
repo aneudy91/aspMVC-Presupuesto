@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Presupuestos.Models.TblEstatu>
+
+@{
+    ViewBag.Title = "Lista de Estatus";
+}
+
+<h2>Lista Estatus</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Estatus", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Modificar", "Edit", new { id=item.IDEstatus }) |
+            @Html.ActionLink("Detalle", "Details", new { id=item.IDEstatus }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IDEstatus })
+        </td>
+    </tr>
+}
+
+</table>

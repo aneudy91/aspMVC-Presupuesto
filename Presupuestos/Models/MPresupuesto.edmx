@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbPresupuestosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblClientes">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreComercial" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="255" />
+          <Property Name="RFC" Type="varchar" MaxLength="20" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="TblConceptos">
+          <Key>
+            <PropertyRef Name="IDConcepto" />
+          </Key>
+          <Property Name="IDConcepto" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="OrdenInsert" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblEmpleados">
+          <Key>
+            <PropertyRef Name="IDEmpleado" />
+          </Key>
+          <Property Name="IDEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Paterno" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Materno" Type="varchar" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="TblEmpresa">
+          <Key>
+            <PropertyRef Name="IDEmpresa" />
+          </Key>
+          <Property Name="IDEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreComercial" Type="varchar" MaxLength="300" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="RFC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DomicilioFiscal_calle" Type="varchar" MaxLength="500" />
+          <Property Name="DomicilioFiscal_noExterior" Type="varchar" MaxLength="100" />
+          <Property Name="DomicilioFiscal_colonia" Type="varchar" MaxLength="500" />
+          <Property Name="DomicilioFiscal_localidad" Type="varchar" MaxLength="500" />
+          <Property Name="DomicilioFiscal_municipio" Type="varchar" MaxLength="500" />
+          <Property Name="DomicilioFiscal_estado" Type="varchar" MaxLength="500" />
+          <Property Name="DomicilioFiscal_pais" Type="varchar" MaxLength="500" />
+          <Property Name="DomicilioFiscal_codigoPostal" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TblEstatus">
+          <Key>
+            <PropertyRef Name="IDEstatus" />
+          </Key>
+          <Property Name="IDEstatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblProyectos">
+          <Key>
+            <PropertyRef Name="IDProyecto" />
+          </Key>
+          <Property Name="IDProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCliente" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Decripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IDEstatus" Type="int" />
+        </EntityType>
+        <EntityType Name="TblProyectosEmpleados">
+          <Key>
+            <PropertyRef Name="IDProyectoEmpleado" />
+          </Key>
+          <Property Name="IDProyectoEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDProyecto" Type="int" />
+          <Property Name="IDEmpleado" Type="int" />
+        </EntityType>
+        <EntityType Name="TblUsuarios">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="NombreCuenta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Clave" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <Association Name="fk_TblProyectos_IDCliente">
+          <End Role="TblClientes" Type="Self.TblClientes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblProyectos" Type="Self.TblProyectos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblClientes">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="TblProyectos">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TblProyectos_IDEstatus">
+          <End Role="TblEstatus" Type="Self.TblEstatus" Multiplicity="0..1" />
+          <End Role="TblProyectos" Type="Self.TblProyectos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEstatus">
+              <PropertyRef Name="IDEstatus" />
+            </Principal>
+            <Dependent Role="TblProyectos">
+              <PropertyRef Name="IDEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TblProyectosEmpleados_IDEmpleado">
+          <End Role="TblEmpleados" Type="Self.TblEmpleados" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblProyectosEmpleados" Type="Self.TblProyectosEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmpleados">
+              <PropertyRef Name="IDEmpleado" />
+            </Principal>
+            <Dependent Role="TblProyectosEmpleados">
+              <PropertyRef Name="IDEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TblProyectosEmpleados_IDProyecto">
+          <End Role="TblProyectos" Type="Self.TblProyectos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblProyectosEmpleados" Type="Self.TblProyectosEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProyectos">
+              <PropertyRef Name="IDProyecto" />
+            </Principal>
+            <Dependent Role="TblProyectosEmpleados">
+              <PropertyRef Name="IDProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbPresupuestosModelStoreContainer">
+          <EntitySet Name="TblClientes" EntityType="Self.TblClientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblConceptos" EntityType="Self.TblConceptos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmpleados" EntityType="Self.TblEmpleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmpresa" EntityType="Self.TblEmpresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEstatus" EntityType="Self.TblEstatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProyectos" EntityType="Self.TblProyectos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProyectosEmpleados" EntityType="Self.TblProyectosEmpleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblUsuarios" EntityType="Self.TblUsuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_TblProyectos_IDCliente" Association="Self.fk_TblProyectos_IDCliente">
+            <End Role="TblClientes" EntitySet="TblClientes" />
+            <End Role="TblProyectos" EntitySet="TblProyectos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TblProyectos_IDEstatus" Association="Self.fk_TblProyectos_IDEstatus">
+            <End Role="TblEstatus" EntitySet="TblEstatus" />
+            <End Role="TblProyectos" EntitySet="TblProyectos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TblProyectosEmpleados_IDEmpleado" Association="Self.fk_TblProyectosEmpleados_IDEmpleado">
+            <End Role="TblEmpleados" EntitySet="TblEmpleados" />
+            <End Role="TblProyectosEmpleados" EntitySet="TblProyectosEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TblProyectosEmpleados_IDProyecto" Association="Self.fk_TblProyectosEmpleados_IDProyecto">
+            <End Role="TblProyectos" EntitySet="TblProyectos" />
+            <End Role="TblProyectosEmpleados" EntitySet="TblProyectosEmpleados" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbPresupuestosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TblEmpresa">
+          <Key>
+            <PropertyRef Name="IDEmpresa" />
+          </Key>
+          <Property Name="IDEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreComercial" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RFC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DomicilioFiscal_calle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioFiscal_noExterior" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioFiscal_colonia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioFiscal_localidad" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioFiscal_municipio" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioFiscal_estado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioFiscal_pais" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioFiscal_codigoPostal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TblUsuario">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="dbPresupuestosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TblEmpresas" EntityType="Self.TblEmpresa" />
+          <EntitySet Name="TblUsuarios" EntityType="Self.TblUsuario" />
+          <EntitySet Name="TblClientes" EntityType="dbPresupuestosModel.TblCliente" />
+          <EntitySet Name="TblEmpleados" EntityType="dbPresupuestosModel.TblEmpleado" />
+          <EntitySet Name="TblConceptos" EntityType="dbPresupuestosModel.TblConcepto" />
+          <EntitySet Name="TblProyectos" EntityType="dbPresupuestosModel.TblProyecto" />
+          <AssociationSet Name="fk_TblProyectos_IDCliente" Association="dbPresupuestosModel.fk_TblProyectos_IDCliente">
+            <End Role="TblCliente" EntitySet="TblClientes" />
+            <End Role="TblProyecto" EntitySet="TblProyectos" />
+          </AssociationSet>
+          <EntitySet Name="TblProyectosEmpleados" EntityType="dbPresupuestosModel.TblProyectosEmpleado" />
+          <AssociationSet Name="fk_TblProyectosEmpleados_IDEmpleado" Association="dbPresupuestosModel.fk_TblProyectosEmpleados_IDEmpleado">
+            <End Role="TblEmpleado" EntitySet="TblEmpleados" />
+            <End Role="TblProyectosEmpleado" EntitySet="TblProyectosEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TblProyectosEmpleados_IDProyecto" Association="dbPresupuestosModel.fk_TblProyectosEmpleados_IDProyecto">
+            <End Role="TblProyecto" EntitySet="TblProyectos" />
+            <End Role="TblProyectosEmpleado" EntitySet="TblProyectosEmpleados" />
+          </AssociationSet>
+          <EntitySet Name="TblEstatus" EntityType="dbPresupuestosModel.TblEstatu" />
+          <AssociationSet Name="fk_TblProyectos_IDEstatus" Association="dbPresupuestosModel.fk_TblProyectos_IDEstatus">
+            <End Role="TblEstatu" EntitySet="TblEstatus" />
+            <End Role="TblProyecto" EntitySet="TblProyectos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TblCliente">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreComercial" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RFC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="TblProyectos" Relationship="dbPresupuestosModel.fk_TblProyectos_IDCliente" FromRole="TblCliente" ToRole="TblProyecto" />
+        </EntityType>
+        <EntityType Name="TblEmpleado">
+          <Key>
+            <PropertyRef Name="IDEmpleado" />
+          </Key>
+          <Property Name="IDEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Paterno" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Materno" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblProyectosEmpleados" Relationship="dbPresupuestosModel.fk_TblProyectosEmpleados_IDEmpleado" FromRole="TblEmpleado" ToRole="TblProyectosEmpleado" />
+        </EntityType>
+        <EntityType Name="TblConcepto">
+          <Key>
+            <PropertyRef Name="IDConcepto" />
+          </Key>
+          <Property Name="IDConcepto" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenInsert" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblProyecto">
+          <Key>
+            <PropertyRef Name="IDProyecto" />
+          </Key>
+          <Property Name="IDProyecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCliente" Type="Int32" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Decripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="TblCliente" Relationship="dbPresupuestosModel.fk_TblProyectos_IDCliente" FromRole="TblProyecto" ToRole="TblCliente" />
+          <NavigationProperty Name="TblProyectosEmpleados" Relationship="dbPresupuestosModel.fk_TblProyectosEmpleados_IDProyecto" FromRole="TblProyecto" ToRole="TblProyectosEmpleado" />
+          <Property Name="IDEstatus" Type="Int32" />
+          <NavigationProperty Name="TblEstatu" Relationship="dbPresupuestosModel.fk_TblProyectos_IDEstatus" FromRole="TblProyecto" ToRole="TblEstatu" />
+        </EntityType>
+        <Association Name="fk_TblProyectos_IDCliente">
+          <End Type="dbPresupuestosModel.TblCliente" Role="TblCliente" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbPresupuestosModel.TblProyecto" Role="TblProyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCliente">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="TblProyecto">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TblProyectosEmpleado">
+          <Key>
+            <PropertyRef Name="IDProyectoEmpleado" />
+          </Key>
+          <Property Name="IDProyectoEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDProyecto" Type="Int32" />
+          <Property Name="IDEmpleado" Type="Int32" />
+          <NavigationProperty Name="TblEmpleado" Relationship="dbPresupuestosModel.fk_TblProyectosEmpleados_IDEmpleado" FromRole="TblProyectosEmpleado" ToRole="TblEmpleado" />
+          <NavigationProperty Name="TblProyecto" Relationship="dbPresupuestosModel.fk_TblProyectosEmpleados_IDProyecto" FromRole="TblProyectosEmpleado" ToRole="TblProyecto" />
+        </EntityType>
+        <Association Name="fk_TblProyectosEmpleados_IDEmpleado">
+          <End Type="dbPresupuestosModel.TblEmpleado" Role="TblEmpleado" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbPresupuestosModel.TblProyectosEmpleado" Role="TblProyectosEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmpleado">
+              <PropertyRef Name="IDEmpleado" />
+            </Principal>
+            <Dependent Role="TblProyectosEmpleado">
+              <PropertyRef Name="IDEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TblProyectosEmpleados_IDProyecto">
+          <End Type="dbPresupuestosModel.TblProyecto" Role="TblProyecto" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbPresupuestosModel.TblProyectosEmpleado" Role="TblProyectosEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProyecto">
+              <PropertyRef Name="IDProyecto" />
+            </Principal>
+            <Dependent Role="TblProyectosEmpleado">
+              <PropertyRef Name="IDProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TblEstatu">
+          <Key>
+            <PropertyRef Name="IDEstatus" />
+          </Key>
+          <Property Name="IDEstatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblProyectos" Relationship="dbPresupuestosModel.fk_TblProyectos_IDEstatus" FromRole="TblEstatu" ToRole="TblProyecto" />
+        </EntityType>
+        <Association Name="fk_TblProyectos_IDEstatus">
+          <End Type="dbPresupuestosModel.TblEstatu" Role="TblEstatu" Multiplicity="0..1" />
+          <End Type="dbPresupuestosModel.TblProyecto" Role="TblProyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEstatu">
+              <PropertyRef Name="IDEstatus" />
+            </Principal>
+            <Dependent Role="TblProyecto">
+              <PropertyRef Name="IDEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbPresupuestosModelStoreContainer" CdmEntityContainer="dbPresupuestosEntities">
+          <EntitySetMapping Name="TblEmpresas">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.TblEmpresa">
+              <MappingFragment StoreEntitySet="TblEmpresa">
+                <ScalarProperty Name="IDEmpresa" ColumnName="IDEmpresa" />
+                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="DomicilioFiscal_calle" ColumnName="DomicilioFiscal_calle" />
+                <ScalarProperty Name="DomicilioFiscal_noExterior" ColumnName="DomicilioFiscal_noExterior" />
+                <ScalarProperty Name="DomicilioFiscal_colonia" ColumnName="DomicilioFiscal_colonia" />
+                <ScalarProperty Name="DomicilioFiscal_localidad" ColumnName="DomicilioFiscal_localidad" />
+                <ScalarProperty Name="DomicilioFiscal_municipio" ColumnName="DomicilioFiscal_municipio" />
+                <ScalarProperty Name="DomicilioFiscal_estado" ColumnName="DomicilioFiscal_estado" />
+                <ScalarProperty Name="DomicilioFiscal_pais" ColumnName="DomicilioFiscal_pais" />
+                <ScalarProperty Name="DomicilioFiscal_codigoPostal" ColumnName="DomicilioFiscal_codigoPostal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblUsuarios">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.TblUsuario">
+              <MappingFragment StoreEntitySet="TblUsuarios">
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NombreCuenta" ColumnName="NombreCuenta" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblClientes">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.TblCliente">
+              <MappingFragment StoreEntitySet="TblClientes">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblEmpleados">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.TblEmpleado">
+              <MappingFragment StoreEntitySet="TblEmpleados">
+                <ScalarProperty Name="Materno" ColumnName="Materno" />
+                <ScalarProperty Name="Paterno" ColumnName="Paterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IDEmpleado" ColumnName="IDEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblConceptos">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.TblConcepto">
+              <MappingFragment StoreEntitySet="TblConceptos">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="OrdenInsert" ColumnName="OrdenInsert" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IDConcepto" ColumnName="IDConcepto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblProyectos">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.TblProyecto">
+              <MappingFragment StoreEntitySet="TblProyectos">
+                <ScalarProperty Name="IDEstatus" ColumnName="IDEstatus" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="IDProyecto" ColumnName="IDProyecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblProyectosEmpleados">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.TblProyectosEmpleado">
+              <MappingFragment StoreEntitySet="TblProyectosEmpleados">
+                <ScalarProperty Name="IDEmpleado" ColumnName="IDEmpleado" />
+                <ScalarProperty Name="IDProyecto" ColumnName="IDProyecto" />
+                <ScalarProperty Name="IDProyectoEmpleado" ColumnName="IDProyectoEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblEstatus">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.TblEstatu">
+              <MappingFragment StoreEntitySet="TblEstatus">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IDEstatus" ColumnName="IDEstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

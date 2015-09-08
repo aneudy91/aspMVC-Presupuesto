@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Presupuestos.Models.TblProyectosEmpleado>
+
+@{
+    ViewBag.Title = "Lista Empleados en Proyectos";
+}
+
+<h2>Lista Empleados en Proyectos</h2>
+
+<p>
+    @Html.ActionLink("Agregar nuevo empleado", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TblEmpleado.Nombre)*@
+            Empleado
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TblProyecto.Nombre)*@
+            Proyecto
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TblEmpleado.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TblProyecto.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Modificar", "Edit", new { id=item.IDProyectoEmpleado }) |
+            @Html.ActionLink("Detalle", "Details", new { id=item.IDProyectoEmpleado }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IDProyectoEmpleado })
+        </td>
+    </tr>
+}
+
+</table>
