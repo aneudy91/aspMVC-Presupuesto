@@ -31,6 +31,9 @@ namespace Presupuestos.Presentacion
                 DDLProyectos.DataBind();
 
                 gvBind();
+
+                gvConceptos.DataSource = dc.BindGrid("exec spBuscarConceptos 0");
+                gvConceptos.DataBind();
             }
 
         }
@@ -38,7 +41,7 @@ namespace Presupuestos.Presentacion
         public void gvBind()
         {
             DataTable dt = dc.BindGrid(" exec spBuscarDetalleProyecto " + DDLProyectos.SelectedValue );
-            DataTable dtConceptos = dc.BindGrid("EXEC spBuscarConceptos ");
+            DataTable dtConceptos = dc.BindGrid("EXEC spBuscarConceptos 1");
 
              GridData.Columns.Clear();
 
@@ -80,7 +83,8 @@ namespace Presupuestos.Presentacion
                     bfield.DataField = col.ColumnName;
 
                     //Initialize the HeaderText field value.
-                    bfield.HeaderText = col.ColumnName + " - " + dtConceptos.Rows[j]["CONCEPTO"];
+                    // bfield.HeaderText = col.ColumnName + " - " + dtConceptos.Rows[j]["CONCEPTO"];
+                    bfield.HeaderText = col.ColumnName;
 
                     //Add the newly created bound field to the GridView.
                     GridData.Columns.Add(bfield);
@@ -155,6 +159,26 @@ namespace Presupuestos.Presentacion
         protected void DDLProyectos_SelectedIndexChanged(object sender, EventArgs e)
         {
             gvBind();
+        }
+
+        protected void btCalcular_Click(object sender, EventArgs e)
+        {
+            dc.CalculoProyecto(Int32.Parse(DDLProyectos.SelectedValue));
+
+            /*
+            gvDetalleProyecto.DataSource = dc.BindGrid("exec spBuscaCalculoProyecto "+Int32.Parse(DDLProyectos.SelectedValue));
+            gvDetalleProyecto.DataBind();
+            */
+
+            gvTotalesGenerales.DataSource = dc.BindGrid("exec spBuscaGranTotal " + Int32.Parse(DDLProyectos.SelectedValue));
+            gvTotalesGenerales.DataBind();
+            //  exec spBuscaGranTotal 3
+
+
+            
+ 
+
+                
         }
             
 

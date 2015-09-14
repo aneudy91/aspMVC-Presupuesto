@@ -7,6 +7,7 @@ declare @Sql nvarchar(max), @columnas varchar(max),@columnas1 varchar(max)
  set @columnas= (SELECT SUBSTRING(
 	(SELECT ',[' + IDConcepto+']'
 	FROM tblConceptos  
+	WHERE IDConcepto NOT IN ('ITBIS','SOLU','GTE','GTET','GTEF','ITBIS','EST','PREF','GAN','COS')
 	order by tblConceptos.ORDENINSERT ASC
 	FOR XML PATH('')),2,200000) 
 	)
@@ -24,4 +25,5 @@ declare @Sql nvarchar(max), @columnas varchar(max),@columnas1 varchar(max)
 	print @sql
 		
 		Exec sp_executesql @Sql
+		
 				

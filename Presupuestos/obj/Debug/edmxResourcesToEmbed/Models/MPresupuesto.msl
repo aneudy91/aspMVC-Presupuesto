@@ -93,5 +93,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="spCrearDetallePeriodo" FunctionName="dbPresupuestosModel.Store.spCrearDetallePeriodo" />
+    <FunctionImportMapping FunctionImportName="spCalculoProyecto" FunctionName="dbPresupuestosModel.Store.spCalculoProyecto" />
   </EntityContainerMapping>
 </Mapping>

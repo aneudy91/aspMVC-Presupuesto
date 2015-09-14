@@ -44,5 +44,14 @@ namespace Presupuestos.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCrearDetallePeriodo", iDProyectoParameter);
         }
+    
+        public virtual int spCalculoProyecto(Nullable<int> iDProyecto)
+        {
+            var iDProyectoParameter = iDProyecto.HasValue ?
+                new ObjectParameter("IDProyecto", iDProyecto) :
+                new ObjectParameter("IDProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCalculoProyecto", iDProyectoParameter);
+        }
     }
 }

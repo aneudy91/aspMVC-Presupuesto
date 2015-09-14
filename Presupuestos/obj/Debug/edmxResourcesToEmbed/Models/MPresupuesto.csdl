@@ -55,6 +55,9 @@
     <FunctionImport Name="spCrearDetallePeriodo">
       <Parameter Name="IDProyecto" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="spCalculoProyecto">
+      <Parameter Name="IDProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="TblCliente">
     <Key>

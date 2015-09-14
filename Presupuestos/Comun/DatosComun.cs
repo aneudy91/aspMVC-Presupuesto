@@ -112,5 +112,20 @@ namespace Presupuestos.Datos
 
             return DatosComun.ejecutarNonQuery("spActualizarDetalleProyecto", parametros);
         }
+
+
+        public int CalculoProyecto(int IDProyecto)
+        {
+            List<DbParameter> parametros = new List<DbParameter>();
+
+            DbParameter param = DatosComun.dpf.CreateParameter();
+            param.Value = IDProyecto;
+            param.ParameterName = "IDProyecto";
+            parametros.Add(param);
+
+            return DatosComun.ejecutarNonQuery("spCalculoProyecto", parametros);
+        
+        }
+
     }
 }
