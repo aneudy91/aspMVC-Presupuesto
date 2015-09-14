@@ -40,7 +40,13 @@ namespace Presupuestos.Presentacion
 
         public void gvBind()
         {
-            DataTable dt = dc.BindGrid(" exec spBuscarDetalleProyecto " + DDLProyectos.SelectedValue );
+
+            if (DDLProyectos.SelectedValue == null)
+            {
+                return;
+            }
+
+            DataTable dt = dc.BindGrid(" exec spBuscarDetalleProyecto " + DDLProyectos.SelectedValue);
             DataTable dtConceptos = dc.BindGrid("EXEC spBuscarConceptos 1");
 
              GridData.Columns.Clear();

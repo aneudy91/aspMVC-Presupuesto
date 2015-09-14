@@ -1,4 +1,4 @@
-ALTER procedure spBuscaGranTotal(@IDProyecto INT)
+create procedure spBuscaGranTotal(@IDProyecto INT)
 as
  DECLARE @LISTA_CONCEPTO NVARCHAR(MAX)
 		,@Sql nvarchar(max), @columnas varchar(max),@columnas1 varchar(max)

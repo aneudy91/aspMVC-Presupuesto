@@ -3,7 +3,7 @@
 	1 : De captura
 	2 : Totales
 */
-alter PROCEDURE spBuscarConceptos(@Tipo int)
+create PROCEDURE spBuscarConceptos(@Tipo int)
 as
 
 	if (@Tipo = 0 )

@@ -1,4 +1,4 @@
-alter PROCEDURE spActualizarDetalleProyecto(@IDProyecto int,@Concepto varchar(20), @IDEmpleado int,@Cap1 decimal(10,2))
+create PROCEDURE spActualizarDetalleProyecto(@IDProyecto int,@Concepto varchar(20), @IDEmpleado int,@Cap1 decimal(10,2))
 as
 
 	Declare @chPos int
