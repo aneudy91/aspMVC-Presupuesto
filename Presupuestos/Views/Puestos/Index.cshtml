@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Presupuestos.Models.TblPuesto>
+
+@{
+    ViewBag.Title = "Catálogo de puestos";
+}
+
+<h2>Catálogo de Puestos</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo puesto", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Modificar", "Edit", new { id=item.IDPuesto }) |
+            @Html.ActionLink("Detalle", "Details", new { id=item.IDPuesto }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IDPuesto })
+        </td>
+    </tr>
+}
+
+</table>

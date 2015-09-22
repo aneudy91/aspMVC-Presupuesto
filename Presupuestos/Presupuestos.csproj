@@ -163,7 +163,9 @@
       <DependentUpon>MPresupuesto.edmx</DependentUpon>
       <LastGenOutput>MPresupuesto.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\Presupuestos.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Presentacion\FrmAbonosProyectos.aspx" />
     <Content Include="Presentacion\FrmCapturaGeneral.aspx" />
     <Content Include="Presentacion\FrmCerrarSession.aspx" />
     <Content Include="Presentacion\FrmHome.aspx" />
@@ -224,11 +226,6 @@
     <Content Include="Views\Clientes\Details.cshtml" />
     <Content Include="Views\Clientes\Edit.cshtml" />
     <Content Include="Views\Clientes\Index.cshtml" />
-    <Content Include="Views\Empleados\Create.cshtml" />
-    <Content Include="Views\Empleados\Delete.cshtml" />
-    <Content Include="Views\Empleados\Details.cshtml" />
-    <Content Include="Views\Empleados\Edit.cshtml" />
-    <Content Include="Views\Empleados\Index.cshtml" />
     <Content Include="Views\Conceptos\Create.cshtml" />
     <Content Include="Views\Conceptos\Delete.cshtml" />
     <Content Include="Views\Conceptos\Details.cshtml" />
@@ -250,6 +247,21 @@
     <Content Include="Views\Proyectos\Edit.cshtml" />
     <Content Include="Views\Proyectos\Index.cshtml" />
     <Content Include="Views\Proyectos\ActualizaDetalleProyecto.cshtml" />
+    <Content Include="Views\Puestos\Create.cshtml" />
+    <Content Include="Views\Puestos\Delete.cshtml" />
+    <Content Include="Views\Puestos\Details.cshtml" />
+    <Content Include="Views\Puestos\Edit.cshtml" />
+    <Content Include="Views\Puestos\Index.cshtml" />
+    <Content Include="Views\Empleados\Create.cshtml" />
+    <Content Include="Views\Empleados\Delete.cshtml" />
+    <Content Include="Views\Empleados\Details.cshtml" />
+    <Content Include="Views\Empleados\Edit.cshtml" />
+    <Content Include="Views\Empleados\Index.cshtml" />
+    <Content Include="Views\Config\Create.cshtml" />
+    <Content Include="Views\Config\Delete.cshtml" />
+    <Content Include="Views\Config\Details.cshtml" />
+    <Content Include="Views\Config\Edit.cshtml" />
+    <Content Include="Views\Config\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -270,6 +282,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Comun\DatosComun.cs" />
     <Compile Include="Comun\mUsuario.cs" />
+    <Compile Include="Comun\Proyecto.cs" />
     <Compile Include="Comun\SQLHelper.cs" />
     <Compile Include="Comun\Utilerias.cs" />
     <Compile Include="Contact.aspx.cs">
@@ -286,6 +299,7 @@
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EstatusController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
+    <Compile Include="Controllers\PuestosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -297,6 +311,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConfigController.cs" />
     <Compile Include="Models\MPresupuesto.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -327,14 +342,27 @@
     <Compile Include="Models\TblEstatu.cs">
       <DependentUpon>MPresupuesto.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblListaConfig.cs">
+      <DependentUpon>MPresupuesto.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TblProyecto.cs">
       <DependentUpon>MPresupuesto.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TblProyectosEmpleado.cs">
       <DependentUpon>MPresupuesto.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TblPuesto.cs">
+      <DependentUpon>MPresupuesto.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TblUsuario.cs">
       <DependentUpon>MPresupuesto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FrmAbonosProyectos.aspx.cs">
+      <DependentUpon>FrmAbonosProyectos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FrmAbonosProyectos.aspx.designer.cs">
+      <DependentUpon>FrmAbonosProyectos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FrmCapturaGeneral.aspx.cs">
       <DependentUpon>FrmCapturaGeneral.aspx</DependentUpon>

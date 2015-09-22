@@ -113,6 +113,33 @@ namespace Presupuestos.Datos
             return DatosComun.ejecutarNonQuery("spActualizarDetalleProyecto", parametros);
         }
 
+        public int spIAbono(int IDProyecto, DateTime Fecha, decimal Total, string RecibiDe)
+        {
+            List<DbParameter> parametros = new List<DbParameter>();
+
+            DbParameter param = DatosComun.dpf.CreateParameter();
+            param.Value = IDProyecto;
+            param.ParameterName = "IDProyecto";
+            parametros.Add(param);
+
+            DbParameter param1 = DatosComun.dpf.CreateParameter();
+            param1.Value = Fecha;
+            param1.ParameterName = "Fecha";
+            parametros.Add(param1);
+
+            DbParameter param2 = DatosComun.dpf.CreateParameter();
+            param2.Value = Total;
+            param2.ParameterName = "Total";
+            parametros.Add(param2);
+
+            DbParameter param3 = DatosComun.dpf.CreateParameter();
+            param3.Value = RecibiDe;
+            param3.ParameterName = "RecibiDe";
+            parametros.Add(param3);
+
+
+            return DatosComun.ejecutarNonQuery("spIAbono", parametros);
+        }
 
         public int CalculoProyecto(int IDProyecto)
         {
@@ -126,6 +153,7 @@ namespace Presupuestos.Datos
             return DatosComun.ejecutarNonQuery("spCalculoProyecto", parametros);
         
         }
+
 
     }
 }

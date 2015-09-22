@@ -18,15 +18,29 @@ namespace Presupuestos.Controllers
         private dbPresupuestosEntities db = new dbPresupuestosEntities();
 
         // GET: /EmpleadoProyecto/
-        public ActionResult Index()
+        public ActionResult Index(string IDProyecto)
         {
             var user = Session["User"] as mUsuario;
 
             if (user == null)
                 return Redirect("~/Default");
 
+
+            int IDpro;
+
+            if (string.IsNullOrEmpty(IDProyecto))
+            {
+                IDpro = 0;
+            }
+            else
+            {
+                IDpro = Convert.ToInt32(IDProyecto);
+            }
+
+            ViewBag.IDProyecto = new SelectList(db.TblProyectos, "IDProyecto", "NOMBRE", "NOMBRE");            
+
             var tblproyectosempleados = db.TblProyectosEmpleados.Include(t => t.TblEmpleado).Include(t => t.TblProyecto);
-            return View(tblproyectosempleados.ToList());
+            return View(tblproyectosempleados.ToList().Where(x => x.IDProyecto == IDpro));
         }
 
         // GET: /EmpleadoProyecto/Details/5

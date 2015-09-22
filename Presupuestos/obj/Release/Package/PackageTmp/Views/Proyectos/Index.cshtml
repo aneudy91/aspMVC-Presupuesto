@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Presupuestos.Models.TblProyecto>
+
+@{
+    ViewBag.Title = "Lista de Proyectos";
+}
+
+<h2>Lista de Proyectos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Proyecto", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Decripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TblCliente.NombreComercial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TblEstatu.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Decripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TblCliente.NombreComercial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TblEstatu.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Modificar", "Edit", new { id=item.IDProyecto }) |
+            @Html.ActionLink("Detalle", "Details", new { id=item.IDProyecto }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IDProyecto }) |
+            @Html.ActionLink("Crear Detalle", "ActualizaDetalleProyecto", new { id = item.IDProyecto })
+            
+        </td>
+    </tr>
+}
+
+</table>

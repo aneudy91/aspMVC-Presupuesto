@@ -35,6 +35,8 @@ namespace Presupuestos.Models
         public virtual DbSet<TblProyecto> TblProyectos { get; set; }
         public virtual DbSet<TblProyectosEmpleado> TblProyectosEmpleados { get; set; }
         public virtual DbSet<TblEstatu> TblEstatus { get; set; }
+        public virtual DbSet<TblPuesto> TblPuestos { get; set; }
+        public virtual DbSet<tblListaConfig> tblListaConfigs { get; set; }
     
         public virtual int spCrearDetallePeriodo(Nullable<int> iDProyecto)
         {

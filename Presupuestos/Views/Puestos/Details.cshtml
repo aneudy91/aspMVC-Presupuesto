@@ -1,0 +1,26 @@
+﻿@model Presupuestos.Models.TblPuesto
+
+@{
+    ViewBag.Title = "Detalle del puesto";
+}
+
+<h2>Detalle del puesto</h2>
+
+<div>
+    @*<h4>TblPuesto</h4>*@
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.IDPuesto }) |
+    @Html.ActionLink("Regresar a la Lista", "Index")
+</p>

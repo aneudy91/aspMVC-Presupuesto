@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Presupuestos.Models.TblEmpresa>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreComercial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RazonSocial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RFC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomicilioFiscal_calle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomicilioFiscal_noExterior)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomicilioFiscal_colonia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomicilioFiscal_localidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomicilioFiscal_municipio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomicilioFiscal_estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomicilioFiscal_pais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomicilioFiscal_codigoPostal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreComercial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RazonSocial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RFC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomicilioFiscal_calle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomicilioFiscal_noExterior)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomicilioFiscal_colonia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomicilioFiscal_localidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomicilioFiscal_municipio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomicilioFiscal_estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomicilioFiscal_pais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomicilioFiscal_codigoPostal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDEmpresa }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDEmpresa }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDEmpresa })
+        </td>
+    </tr>
+}
+
+</table>

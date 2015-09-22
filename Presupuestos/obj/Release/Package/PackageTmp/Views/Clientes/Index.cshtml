@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Presupuestos.Models.TblCliente>
+
+@{
+    ViewBag.Title = "Lista de Clientes";
+}
+
+<h2>Lista de Clientes</h2>
+
+<p>
+    @Html.ActionLink("Agregar nuevo cliente", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.NombreComercial)*@
+            <b>Nombre Comercial</b>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.RazonSocial)*@
+            <b>Razón Social</b>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RFC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreComercial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RazonSocial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RFC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.ActionLink("Modificar", "Edit", new { id=item.IDCliente }) |
+            @Html.ActionLink("Detalle", "Details", new { id=item.IDCliente }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IDCliente })
+        </td>
+    </tr>
+}
+
+</table>

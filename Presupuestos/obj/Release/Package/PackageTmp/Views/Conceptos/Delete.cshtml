@@ -1,0 +1,48 @@
+﻿@model Presupuestos.Models.TblConcepto
+
+@{
+    ViewBag.Title = "Eliminar Concepto";
+}
+
+<h2>Eliminar Concepto</h2>
+
+<h3>¿Confirma que desea eliminar este concepto?</h3>
+<div>
+    @*<h4>TblConcepto</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrdenInsert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrdenInsert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la Lista", "Index")
+        </div>
+    }
+</div>

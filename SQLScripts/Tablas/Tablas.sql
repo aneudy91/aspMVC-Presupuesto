@@ -1,3 +1,12 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tblListaConfig]') AND type in (N'U'))
+    DROP TABLE [dbo].[tblListaConfig]
+GO
+CREATE TABLE tblListaConfig(
+	 Nombre varchar(100) not null primary key
+	,Valor varchar(500)	
+	,Descripcion NVARCHAR(1000)
+);
+GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblEmpresa]') AND type in (N'U'))
     DROP TABLE [dbo].[TblEmpresa]
 GO
@@ -24,7 +33,7 @@ CREATE TABLE TblUsuarios(
 	,Nombre varchar(150) not null
 	,NombreCuenta varchar(100) not null
 	,Clave nvarchar(100) not null
-	,Active bit default 1
+	,Active bit default 1 /*Corregir*/
 );
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblClientes]') AND type in (N'U'))
@@ -38,6 +47,14 @@ CREATE TABLE TblClientes(
    ,Activo bit default 1
 );
 GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblPuestos]') AND type in (N'U'))
+    DROP TABLE [dbo].[TblPuestos]
+GO
+CREATE TABLE TblPuestos(
+	 IDPuesto int identity(1,1) primary key not null
+	,Descripcion varchar(100) not null
+);
+GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblEmpleados]') AND type in (N'U'))
     DROP TABLE [dbo].[TblEmpleados]
 GO
@@ -45,7 +62,8 @@ CREATE TABLE TblEmpleados(
 	 IDEmpleado int identity(1,1) primary key not null
 	,Nombre varchar(100) not null
 	,Paterno varchar(100) not null
-	,Materno varchar(60) null	
+	,Materno varchar(60) null
+	,IDPuesto int CONSTRAINT Fk_TblEmpleados_IDPuesto foreign key references TblPuestos(IDPuesto)	
 );
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblConceptos]') AND type in (N'U'))
@@ -101,4 +119,18 @@ CREATE TABLE TblDetalleProyectos(
 	,CAP2 DECIMAL(10,2) DEFAULT 0
 	,CAP3 DECIMAL(10,2) DEFAULT 0
 	,TOTAL DECIMAL(10,2) DEFAULT 0
-)
+);
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblAbonosProyectos]') AND type in (N'U'))
+    DROP TABLE [dbo].[TblAbonosProyectos]
+GO
+CREATE TABLE TblAbonosProyectos(
+	 IDAbonosProyectos int identity(1,1) primary key
+	,IDProyecto int CONSTRAINT fk_TblAbonosProyectos_IDProyecto FOREIGN KEY REFERENCES TblProyectos(IDProyecto) ON DELETE CASCADE
+	,Fecha Date not null		
+	,SubTotal money not null 	-- 820
+	,Impuesto money 			-- 180
+	,Total money				-- 1,000
+	,RecibiDe varchar(150)
+	,FechaReg datetime default getdate()
+);

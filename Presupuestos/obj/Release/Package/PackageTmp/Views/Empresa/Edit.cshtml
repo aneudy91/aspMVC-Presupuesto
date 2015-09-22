@@ -1,0 +1,122 @@
+﻿@model Presupuestos.Models.TblEmpresa
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>TblEmpresa</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.IDEmpresa)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NombreComercial, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NombreComercial)
+                @Html.ValidationMessageFor(model => model.NombreComercial)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RazonSocial, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RazonSocial)
+                @Html.ValidationMessageFor(model => model.RazonSocial)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RFC, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RFC)
+                @Html.ValidationMessageFor(model => model.RFC)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DomicilioFiscal_calle, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DomicilioFiscal_calle)
+                @Html.ValidationMessageFor(model => model.DomicilioFiscal_calle)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DomicilioFiscal_noExterior, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DomicilioFiscal_noExterior)
+                @Html.ValidationMessageFor(model => model.DomicilioFiscal_noExterior)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DomicilioFiscal_colonia, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DomicilioFiscal_colonia)
+                @Html.ValidationMessageFor(model => model.DomicilioFiscal_colonia)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DomicilioFiscal_localidad, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DomicilioFiscal_localidad)
+                @Html.ValidationMessageFor(model => model.DomicilioFiscal_localidad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DomicilioFiscal_municipio, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DomicilioFiscal_municipio)
+                @Html.ValidationMessageFor(model => model.DomicilioFiscal_municipio)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DomicilioFiscal_estado, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DomicilioFiscal_estado)
+                @Html.ValidationMessageFor(model => model.DomicilioFiscal_estado)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DomicilioFiscal_pais, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DomicilioFiscal_pais)
+                @Html.ValidationMessageFor(model => model.DomicilioFiscal_pais)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DomicilioFiscal_codigoPostal, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DomicilioFiscal_codigoPostal)
+                @Html.ValidationMessageFor(model => model.DomicilioFiscal_codigoPostal)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

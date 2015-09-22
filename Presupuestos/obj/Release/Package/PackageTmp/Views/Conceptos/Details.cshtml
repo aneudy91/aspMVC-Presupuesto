@@ -1,0 +1,42 @@
+﻿@model Presupuestos.Models.TblConcepto
+
+@{
+    ViewBag.Title = "Detalle del Concepto";
+}
+
+<h2>Detalle del Concepto</h2>
+
+<div>
+    @*<h4>TblConcepto</h4>*@
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrdenInsert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrdenInsert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.IDConcepto }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

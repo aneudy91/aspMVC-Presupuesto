@@ -32,6 +32,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Paterno" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Materno" Type="varchar" MaxLength="60" />
+          <Property Name="IDPuesto" Type="int" />
         </EntityType>
         <EntityType Name="TblEmpresa">
           <Key>
@@ -57,6 +58,14 @@
           <Property Name="IDEstatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblListaConfig">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Valor" Type="varchar" MaxLength="500" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
         <EntityType Name="TblProyectos">
           <Key>
             <PropertyRef Name="IDProyecto" />
@@ -78,6 +87,13 @@
           <Property Name="IDProyecto" Type="int" />
           <Property Name="IDEmpleado" Type="int" />
         </EntityType>
+        <EntityType Name="TblPuestos">
+          <Key>
+            <PropertyRef Name="IDPuesto" />
+          </Key>
+          <Property Name="IDPuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="TblUsuarios">
           <Key>
             <PropertyRef Name="IDUsuario" />
@@ -88,6 +104,18 @@
           <Property Name="Clave" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Active" Type="bit" />
         </EntityType>
+        <Association Name="Fk_TblEmpleados_IDPuesto">
+          <End Role="TblPuestos" Type="Self.TblPuestos" Multiplicity="0..1" />
+          <End Role="TblEmpleados" Type="Self.TblEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPuestos">
+              <PropertyRef Name="IDPuesto" />
+            </Principal>
+            <Dependent Role="TblEmpleados">
+              <PropertyRef Name="IDPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_TblProyectos_IDCliente">
           <End Role="TblClientes" Type="Self.TblClientes" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -154,9 +182,15 @@
           <EntitySet Name="TblEmpleados" EntityType="Self.TblEmpleados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblEmpresa" EntityType="Self.TblEmpresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblEstatus" EntityType="Self.TblEstatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblListaConfig" EntityType="Self.tblListaConfig" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblProyectos" EntityType="Self.TblProyectos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblProyectosEmpleados" EntityType="Self.TblProyectosEmpleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblPuestos" EntityType="Self.TblPuestos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblUsuarios" EntityType="Self.TblUsuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Fk_TblEmpleados_IDPuesto" Association="Self.Fk_TblEmpleados_IDPuesto">
+            <End Role="TblPuestos" EntitySet="TblPuestos" />
+            <End Role="TblEmpleados" EntitySet="TblEmpleados" />
+          </AssociationSet>
           <AssociationSet Name="fk_TblProyectos_IDCliente" Association="Self.fk_TblProyectos_IDCliente">
             <End Role="TblClientes" EntitySet="TblClientes" />
             <End Role="TblProyectos" EntitySet="TblProyectos" />
@@ -234,8 +268,14 @@
           <Parameter Name="IDProyecto" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spCalculoProyecto">
-            <Parameter Name="IDProyecto" Mode="In" Type="Int32" />
+          <Parameter Name="IDProyecto" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="TblPuestos" EntityType="dbPresupuestosModel.TblPuesto" />
+          <AssociationSet Name="Fk_TblEmpleados_IDPuesto" Association="dbPresupuestosModel.Fk_TblEmpleados_IDPuesto">
+            <End Role="TblPuesto" EntitySet="TblPuestos" />
+            <End Role="TblEmpleado" EntitySet="TblEmpleados" />
+          </AssociationSet>
+          <EntitySet Name="tblListaConfigs" EntityType="dbPresupuestosModel.tblListaConfig" />
         </EntityContainer>
         <EntityType Name="TblCliente">
           <Key>
@@ -257,6 +297,8 @@
           <Property Name="Paterno" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Materno" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TblProyectosEmpleados" Relationship="dbPresupuestosModel.fk_TblProyectosEmpleados_IDEmpleado" FromRole="TblEmpleado" ToRole="TblProyectosEmpleado" />
+          <Property Name="IDPuesto" Type="Int32" />
+          <NavigationProperty Name="TblPuesto" Relationship="dbPresupuestosModel.Fk_TblEmpleados_IDPuesto" FromRole="TblEmpleado" ToRole="TblPuesto" />
         </EntityType>
         <EntityType Name="TblConcepto">
           <Key>
@@ -355,6 +397,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TblPuesto">
+          <Key>
+            <PropertyRef Name="IDPuesto" />
+          </Key>
+          <Property Name="IDPuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblEmpleados" Relationship="dbPresupuestosModel.Fk_TblEmpleados_IDPuesto" FromRole="TblPuesto" ToRole="TblEmpleado" />
+        </EntityType>
+        <Association Name="Fk_TblEmpleados_IDPuesto">
+          <End Type="dbPresupuestosModel.TblPuesto" Role="TblPuesto" Multiplicity="0..1" />
+          <End Type="dbPresupuestosModel.TblEmpleado" Role="TblEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPuesto">
+              <PropertyRef Name="IDPuesto" />
+            </Principal>
+            <Dependent Role="TblEmpleado">
+              <PropertyRef Name="IDPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblListaConfig">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -404,6 +474,7 @@
           <EntitySetMapping Name="TblEmpleados">
             <EntityTypeMapping TypeName="dbPresupuestosModel.TblEmpleado">
               <MappingFragment StoreEntitySet="TblEmpleados">
+                <ScalarProperty Name="IDPuesto" ColumnName="IDPuesto" />
                 <ScalarProperty Name="Materno" ColumnName="Materno" />
                 <ScalarProperty Name="Paterno" ColumnName="Paterno" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -454,6 +525,23 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spCrearDetallePeriodo" FunctionName="dbPresupuestosModel.Store.spCrearDetallePeriodo" />
           <FunctionImportMapping FunctionImportName="spCalculoProyecto" FunctionName="dbPresupuestosModel.Store.spCalculoProyecto" />
+          <EntitySetMapping Name="TblPuestos">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.TblPuesto">
+              <MappingFragment StoreEntitySet="TblPuestos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IDPuesto" ColumnName="IDPuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblListaConfigs">
+            <EntityTypeMapping TypeName="dbPresupuestosModel.tblListaConfig">
+              <MappingFragment StoreEntitySet="tblListaConfig">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
