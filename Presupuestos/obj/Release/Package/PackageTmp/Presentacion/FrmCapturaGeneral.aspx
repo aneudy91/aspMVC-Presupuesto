@@ -58,4 +58,6 @@
        <asp:Label ID="Label2" runat="server" Text="Catálogo de Conceptos"></asp:Label></h3>
     <asp:GridView ID="gvConceptos" runat="server" CssClass="table table-hover table-striped"></asp:GridView>
 
+    <br />
+    <p> * Cuando el valor de PRECIO en el Colaraborador "Elementos del Proyecto" es igual 0, el sistema le asigna en valor del concepto "Estimado" + el 40% </p>
 </asp:Content>

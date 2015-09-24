@@ -262,6 +262,7 @@
     <Content Include="Views\Config\Details.cshtml" />
     <Content Include="Views\Config\Edit.cshtml" />
     <Content Include="Views\Config\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -298,6 +299,7 @@
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EstatusController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
     <Compile Include="Controllers\PuestosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -311,7 +313,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ConfigController.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Models\MPresupuesto.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
