@@ -40,3 +40,5 @@ from tblProyectos
 
 
 */
+
+exec spBuscarProyecto 3

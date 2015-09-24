@@ -56,10 +56,10 @@
     <asp:GridView ID="GvAbonos" runat="server"   CssClass="table table-hover table-striped" ></asp:GridView>      
 
 
-<script type="text/javascript">
+<%--<script type="text/javascript">
     $(function () {
         $("#FechaAbono").datepicker({ dateFormat: "dd-mm-yy" }).val();      
     });
-</script>
+</script>--%>
 </asp:Content>
 
