@@ -17,6 +17,7 @@ namespace Presupuestos.Models
         public TblEmpleado()
         {
             this.TblProyectosEmpleados = new HashSet<TblProyectosEmpleado>();
+            this.TblUsuarios = new HashSet<TblUsuario>();
         }
     
         public int IDEmpleado { get; set; }
@@ -27,5 +28,6 @@ namespace Presupuestos.Models
     
         public virtual ICollection<TblProyectosEmpleado> TblProyectosEmpleados { get; set; }
         public virtual TblPuesto TblPuesto { get; set; }
+        public virtual ICollection<TblUsuario> TblUsuarios { get; set; }
     }
 }

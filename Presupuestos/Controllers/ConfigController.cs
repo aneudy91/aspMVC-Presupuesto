@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Presupuestos.Comun;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,12 +17,28 @@ namespace Presupuestos.Models
         // GET: /Config/
         public ActionResult Index()
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             return View(db.tblListaConfigs.ToList());
         }
 
         // GET: /Config/Details/5
         public ActionResult Details(string id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -37,6 +54,14 @@ namespace Presupuestos.Models
         // GET: /Config/Create
         public ActionResult Create()
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             return View();
         }
 
@@ -47,6 +72,14 @@ namespace Presupuestos.Models
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Nombre,Valor,Descripcion")] tblListaConfig tbllistaconfig)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (ModelState.IsValid)
             {
                 db.tblListaConfigs.Add(tbllistaconfig);
@@ -60,6 +93,14 @@ namespace Presupuestos.Models
         // GET: /Config/Edit/5
         public ActionResult Edit(string id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -79,6 +120,14 @@ namespace Presupuestos.Models
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="Nombre,Valor,Descripcion")] tblListaConfig tbllistaconfig)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (ModelState.IsValid)
             {
                 db.Entry(tbllistaconfig).State = EntityState.Modified;
@@ -91,6 +140,14 @@ namespace Presupuestos.Models
         // GET: /Config/Delete/5
         public ActionResult Delete(string id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -108,6 +165,14 @@ namespace Presupuestos.Models
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             tblListaConfig tbllistaconfig = db.tblListaConfigs.Find(id);
             db.tblListaConfigs.Remove(tbllistaconfig);
             db.SaveChanges();

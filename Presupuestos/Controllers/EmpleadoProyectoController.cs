@@ -25,6 +25,8 @@ namespace Presupuestos.Controllers
             if (user == null)
                 return Redirect("~/Default");
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             int IDpro;
 
@@ -51,6 +53,9 @@ namespace Presupuestos.Controllers
             if (user == null)
                 return Redirect("~/Default");
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -71,6 +76,9 @@ namespace Presupuestos.Controllers
             if (user == null)
                 return Redirect("~/Default");
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             ViewBag.IDEmpleado = new SelectList(db.TblEmpleados, "IDEmpleado", "Nombre");
             ViewBag.IDProyecto = new SelectList(db.TblProyectos, "IDProyecto", "Nombre");
             return View();
@@ -81,12 +89,15 @@ namespace Presupuestos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="IDProyectoEmpleado,IDProyecto,IDEmpleado")] TblProyectosEmpleado tblproyectosempleado)
+        public ActionResult Create([Bind(Include = "IDProyectoEmpleado,IDProyecto,IDEmpleado,Pagado")] TblProyectosEmpleado tblproyectosempleado)
         {
             var user = Session["User"] as mUsuario;
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             if (ModelState.IsValid)
             {
@@ -108,6 +119,9 @@ namespace Presupuestos.Controllers
             if (user == null)
                 return Redirect("~/Default");
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -127,12 +141,15 @@ namespace Presupuestos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="IDProyectoEmpleado,IDProyecto,IDEmpleado")] TblProyectosEmpleado tblproyectosempleado)
+        public ActionResult Edit([Bind(Include = "IDProyectoEmpleado,IDProyecto,IDEmpleado,Pagado")] TblProyectosEmpleado tblproyectosempleado)
         {
             var user = Session["User"] as mUsuario;
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             if (ModelState.IsValid)
             {
@@ -152,6 +169,9 @@ namespace Presupuestos.Controllers
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             if (id == null)
             {
@@ -174,6 +194,9 @@ namespace Presupuestos.Controllers
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             TblProyectosEmpleado tblproyectosempleado = db.TblProyectosEmpleados.Find(id);
             db.TblProyectosEmpleados.Remove(tblproyectosempleado);

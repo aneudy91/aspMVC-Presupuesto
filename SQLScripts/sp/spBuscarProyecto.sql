@@ -5,7 +5,7 @@ DECLARE @CostoTotal		money,
         @CostoRestante	money,
         @AbonosTotal	money
         
-        select @CostoTotal = TOTAL
+        select @CostoTotal = sum(TOTAL)
         from TblDetalleProyectos with (nolock)
         where (IDProyecto = @IDProyecto) and (IDConcepto = 'PREF') 
         
@@ -22,7 +22,7 @@ DECLARE @CostoTotal		money,
 			inner join TblClientes c with (nolock) on p.IDCliente = c.IDCliente
 			left join TblEstatus e with (nolock) on p.IDEstatus = e.IDEstatus
 		where IDProyecto = @IDProyecto
-		        
+	go	        
 /*
         
 SELECT *

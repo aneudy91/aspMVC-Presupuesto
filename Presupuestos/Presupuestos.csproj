@@ -169,6 +169,7 @@
     <Content Include="Presentacion\FrmCapturaGeneral.aspx" />
     <Content Include="Presentacion\FrmCerrarSession.aspx" />
     <Content Include="Presentacion\FrmHome.aspx" />
+    <Content Include="Presentacion\FrmHomeEmpleados.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -211,11 +212,6 @@
     <Content Include="Views\web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
-    <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Edit.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Empresa\Create.cshtml" />
     <Content Include="Views\Empresa\Delete.cshtml" />
     <Content Include="Views\Empresa\Details.cshtml" />
@@ -263,6 +259,11 @@
     <Content Include="Views\Config\Edit.cshtml" />
     <Content Include="Views\Config\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -282,6 +283,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Comun\DatosComun.cs" />
+    <Compile Include="Comun\mEmpleado.cs" />
     <Compile Include="Comun\mUsuario.cs" />
     <Compile Include="Comun\Proyecto.cs" />
     <Compile Include="Comun\SQLHelper.cs" />
@@ -386,6 +388,13 @@
     </Compile>
     <Compile Include="Presentacion\FrmHome.aspx.designer.cs">
       <DependentUpon>FrmHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FrmHomeEmpleados.aspx.cs">
+      <DependentUpon>FrmHomeEmpleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FrmHomeEmpleados.aspx.designer.cs">
+      <DependentUpon>FrmHomeEmpleados.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

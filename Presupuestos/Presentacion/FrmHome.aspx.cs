@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Presupuestos.Comun;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,14 @@ namespace Presupuestos.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                Response.Redirect("~/Presentacion/FrmCerrarSession.aspx");
+
+            if (user.Tipo.Equals(2))
+                Response.Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
 
         }
     }

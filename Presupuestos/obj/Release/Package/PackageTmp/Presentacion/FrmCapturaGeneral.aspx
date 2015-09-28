@@ -60,4 +60,6 @@
 
     <br />
     <p> * Cuando el valor de PRECIO en el Colaraborador "Elementos del Proyecto" es igual 0, el sistema le asigna en valor del concepto "Estimado" + el 40% </p>
+    <hr />
+    <p> * Para recalcular el concepto de comisión debe poner 0 en la captura. </p>
 </asp:Content>

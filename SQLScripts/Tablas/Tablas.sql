@@ -25,17 +25,6 @@ CREATE TABLE TblEmpresa(
 	,DomicilioFiscal_codigoPostal varchar(100)
 );
 GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblUsuarios]') AND type in (N'U'))
-    DROP TABLE [dbo].[TblUsuarios]
-GO
-CREATE TABLE TblUsuarios(
-	 IDUsuario int identity(1,1) primary key not null	
-	,Nombre varchar(150) not null
-	,NombreCuenta varchar(100) not null
-	,Clave nvarchar(100) not null
-	,Active bit default 1 /*Corregir*/
-);
-GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblClientes]') AND type in (N'U'))
     DROP TABLE [dbo].[TblClientes]
 GO
@@ -64,6 +53,19 @@ CREATE TABLE TblEmpleados(
 	,Paterno varchar(100) not null
 	,Materno varchar(60) null
 	,IDPuesto int CONSTRAINT Fk_TblEmpleados_IDPuesto foreign key references TblPuestos(IDPuesto)	
+);
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblUsuarios]') AND type in (N'U'))
+    DROP TABLE [dbo].[TblUsuarios]
+GO
+CREATE TABLE TblUsuarios(
+	 IDUsuario int identity(1,1) primary key not null	
+	,Nombre varchar(150) not null
+	,NombreCuenta varchar(100) not null
+	,Clave nvarchar(100) not null
+	,Active bit default 1 /*Corregir*/
+	,Tipo int /*1 = Admin 2 = Empleado*/
+	,IDEmpleado int CONSTRAINT fk_TblUsuarios_IDEmpleado foreign key references TblEmpleados(IDEmpleado) on delete cascade
 );
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblConceptos]') AND type in (N'U'))
@@ -105,6 +107,7 @@ CREATE TABLE TblProyectosEmpleados(
 	 IDProyectoEmpleado int identity(1,1) primary key not null
 	,IDProyecto int CONSTRAINT fk_TblProyectosEmpleados_IDProyecto FOREIGN KEY REFERENCES TblProyectos(IDProyecto) ON DELETE CASCADE
 	,IDEmpleado int CONSTRAINT fk_TblProyectosEmpleados_IDEmpleado FOREIGN KEY REFERENCES TblEmpleados(IDEmpleado) ON DELETE CASCADE
+	,Pagado bit default 0
 );
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblDetalleProyectos]') AND type in (N'U'))

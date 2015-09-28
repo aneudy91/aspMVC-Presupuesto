@@ -22,6 +22,9 @@ namespace Presupuestos.Presentacion
             if (user == null)
                 Response.Redirect("~/Presentacion/FrmCerrarSession.aspx");
 
+            if (user.Tipo.Equals(2))
+                Response.Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (!IsPostBack)
             {
                 DDLProyectos.DataSource = dc.BindGrid("EXEC spBuscarProyectos 1");

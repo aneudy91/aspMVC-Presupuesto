@@ -24,6 +24,9 @@ namespace Presupuestos.Controllers
             if (user == null)
                 return Redirect("~/Default");
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             return View(db.TblClientes.ToList());
         }
 
@@ -34,6 +37,9 @@ namespace Presupuestos.Controllers
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             if (id == null)
             {
@@ -52,6 +58,9 @@ namespace Presupuestos.Controllers
         {
             var user = Session["User"] as mUsuario;
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (user == null)
                 return Redirect("~/Default");
 
@@ -66,6 +75,9 @@ namespace Presupuestos.Controllers
         public ActionResult Create([Bind(Include="IDCliente,NombreComercial,RazonSocial,RFC,Activo")] TblCliente tblcliente)
         {
             var user = Session["User"] as mUsuario;
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             if (user == null)
                 return Redirect("~/Default");
@@ -88,6 +100,9 @@ namespace Presupuestos.Controllers
             if (user == null)
                 return Redirect("~/Default");
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +124,9 @@ namespace Presupuestos.Controllers
         {
             var user = Session["User"] as mUsuario;
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (user == null)
                 return Redirect("~/Default");
 
@@ -128,6 +146,9 @@ namespace Presupuestos.Controllers
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             if (id == null)
             {
@@ -150,6 +171,9 @@ namespace Presupuestos.Controllers
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             TblCliente tblcliente = db.TblClientes.Find(id);
             db.TblClientes.Remove(tblcliente);

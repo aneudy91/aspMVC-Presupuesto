@@ -6,8 +6,11 @@ DECLARE @IDEmpleado int
 		,@TOTAL DECIMAL (10,2)
 		,@TotalEmpPRE decimal (10,2)
 		,@IDDetalleProyecto int
+		,@IDEmpProyecto int
+		
+		
 
---	set @IDProyecto = 3
+	set @IDEmpProyecto = 4
 
 	/*
 	CREATE drop TABLE #Temp ( ID int identity(1,1) primary key
@@ -19,11 +22,11 @@ DECLARE @IDEmpleado int
 	DECLARE EmpP CURSOR LOCAL SCROLL FOR
 		select IDEmpleado
 		from TblProyectosEmpleados
-		where IDProyecto = @IDProyecto and IDEmpleado <> 4
+		where IDProyecto = @IDProyecto and IDEmpleado <> @IDEmpProyecto
 		union
 		select IDEmpleado
 		from TblEmpleados
-		where IDEmpleado = 4
+		where IDEmpleado = @IDEmpProyecto
 		
 	OPEN EmpP
 	FETCH NEXT FROM EmpP INTO @IDEmpleado
@@ -61,7 +64,7 @@ DECLARE @IDEmpleado int
 			from TblDetalleProyectos
 			where IDConcepto = 'COM' and IDProyecto=@IDProyecto and IDEmpleado = @IDEmpleado
 			
-			if (@CAP1 <> 0)
+			if (@CAP1 > 0)
 			begin
 				update TblDetalleProyectos
 				set TOTAL = CAP1
@@ -69,9 +72,15 @@ DECLARE @IDEmpleado int
 			end
 			else
 			begin
+				
+				set @TOTAL = ( dbo.fsTotal(@IDProyecto,@IDEmpleado,'IMP') * dbo.fsTotal(@IDProyecto,@IDEmpleado,'HORAS') );
+				
 				update TblDetalleProyectos
-				set TOTAL = ( dbo.fsTotal(@IDProyecto,@IDEmpleado,'IMP') * dbo.fsTotal(@IDProyecto,@IDEmpleado,'HORAS') )
+				set TOTAL = @TOTAL,
+					CAP1 = @TOTAL
 				where IDConcepto = 'COM' and IDProyecto=@IDProyecto and IDEmpleado = @IDEmpleado
+				
+				set @TOTAL = 0;
 			end
 				
 		-- COS                  Costo                         6           3
@@ -96,12 +105,11 @@ DECLARE @IDEmpleado int
 			from TblDetalleProyectos
 			where IDConcepto = 'PRE' and IDProyecto=@IDProyecto and IDEmpleado = @IDEmpleado
 			
-			if (@CAP1 <> 0)
-			begin
-				
+			if (@CAP1 > 0)
+			begin				
 				select @TotalEmpPRE=SUM(TOTAL)
 				from TblDetalleProyectos
-				where IDConcepto = 'PRE' and IDProyecto=@IDProyecto and IDEmpleado <> 4	
+				where IDConcepto = 'PRE' and IDProyecto=@IDProyecto and IDEmpleado <> @IDEmpProyecto	
 			
 				update TblDetalleProyectos
 				set TOTAL = @CAP1 - @TotalEmpPRE
@@ -112,7 +120,10 @@ DECLARE @IDEmpleado int
 				
 				update TblDetalleProyectos
 				set TOTAL = ( @TOTAL * 0.4) + @TOTAL
-				where IDConcepto = 'PRE' and IDProyecto=@IDProyecto and IDEmpleado = @IDEmpleado	
+				where IDConcepto = 'PRE' and IDProyecto=@IDProyecto and IDEmpleado = @IDEmpleado
+				
+				set @TOTAL = 0;
+				set @TotalEmpPRE = 0;	
 			end;
 				
 		

@@ -23,6 +23,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Active)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TblEmpleado.Nombre)
+        </th>
         <th></th>
     </tr>
 
@@ -35,10 +41,16 @@
             @Html.DisplayFor(modelItem => item.NombreCuenta)
         </td>
         <td>
-            "*********"
+            @Html.DisplayFor(modelItem => item.Clave)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TblEmpleado.Nombre)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.IDUsuario }) |

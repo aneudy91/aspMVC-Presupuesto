@@ -33,7 +33,18 @@ namespace Presupuestos
                 {             
                     Session.Add("User", mu);
                     Session.Add("Nombre",mu.Nombre);
-                    Response.Redirect("~/Presentacion/FrmHome.aspx");      
+                    Session.Add("Tipo", mu.Tipo.ToString());
+
+                    if (mu.Tipo == 1)
+                    {
+                        Response.Redirect("~/Presentacion/FrmHome.aspx"); 
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+                    }
+
+                         
                 }
                 else
                 {

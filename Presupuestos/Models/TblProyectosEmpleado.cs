@@ -17,6 +17,7 @@ namespace Presupuestos.Models
         public int IDProyectoEmpleado { get; set; }
         public Nullable<int> IDProyecto { get; set; }
         public Nullable<int> IDEmpleado { get; set; }
+        public Nullable<bool> Pagado { get; set; }
     
         public virtual TblEmpleado TblEmpleado { get; set; }
         public virtual TblProyecto TblProyecto { get; set; }

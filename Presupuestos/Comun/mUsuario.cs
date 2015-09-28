@@ -18,6 +18,10 @@ namespace Presupuestos.Comun
         public string Nombre { set; get; }
         public string NombreCuenta { set; get; }
         public string Clave { set; get; }
+        public int Tipo { set; get; }
+        public int IDEmpleado { set; get; }
+
+        public mEmpleado mEmp { get; set; }
 
         DataTable dtUserdata;
 
@@ -42,7 +46,15 @@ namespace Presupuestos.Comun
             this.IDUsuario = Convert.ToInt32(dtUserdata.Rows[0]["idUsuario"].ToString());                      
             this.Nombre =dtUserdata.Rows[0]["Nombre"].ToString();
             this.NombreCuenta = dtUserdata.Rows[0]["NombreCuenta"].ToString();
-    
+            this.Tipo = Convert.ToInt32(dtUserdata.Rows[0]["Tipo"].ToString());
+
+            if (dtUserdata.Rows[0]["IDEmpleado"].ToString() != String.Empty)
+                this.IDEmpleado = Convert.ToInt32(dtUserdata.Rows[0]["IDEmpleado"].ToString());
+
+            if (this.Tipo == 2)
+                this.mEmp = new mEmpleado(this.IDEmpleado);
+            else
+                this.mEmp = null;
         }
 
         public mUsuario(string conn, string nombreCuenta, string Clave) 

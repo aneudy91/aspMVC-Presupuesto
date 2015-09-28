@@ -28,6 +28,9 @@
             @*@Html.DisplayNameFor(model => model.TblProyecto.Nombre)*@
             Proyecto
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pagado)
+        </th>
         <th></th>
     </tr>
 
@@ -38,6 +41,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TblProyecto.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pagado)
         </td>
         <td>
             @Html.ActionLink("Modificar", "Edit", new { id=item.IDProyectoEmpleado }) |

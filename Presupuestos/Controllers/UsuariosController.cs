@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Presupuestos.Models;
-
 using Presupuestos.Comun;
 
 namespace Presupuestos.Controllers
@@ -21,20 +20,26 @@ namespace Presupuestos.Controllers
         {
             var user = Session["User"] as mUsuario;
 
-            if (user != null)
-                return View(db.TblUsuarios.ToList());
-            else
+            if (user == null)
                 return Redirect("~/Default");
-            
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
+            var tblusuarios = db.TblUsuarios.Include(t => t.TblEmpleado);
+            return View(tblusuarios.ToList());
         }
 
         // GET: /Usuarios/Details/5
-        public ActionResult Details(int? id)       
+        public ActionResult Details(int? id)
         {
             var user = Session["User"] as mUsuario;
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             if (id == null)
             {
@@ -56,6 +61,10 @@ namespace Presupuestos.Controllers
             if (user == null)
                 return Redirect("~/Default");
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
+            ViewBag.IDEmpleado = new SelectList(db.TblEmpleados, "IDEmpleado", "Nombre");
             return View();
         }
 
@@ -64,22 +73,26 @@ namespace Presupuestos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="IDUsuario,Nombre,NombreCuenta,Clave,Active")] TblUsuario tblusuario)
+        public ActionResult Create([Bind(Include="IDUsuario,Nombre,NombreCuenta,Clave,Active,Tipo,IDEmpleado")] TblUsuario tblusuario)
         {
             var user = Session["User"] as mUsuario;
 
             if (user == null)
                 return Redirect("~/Default");
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (ModelState.IsValid)
             {
                 tblusuario.Clave = Comun.Utilerias.Code(tblusuario.Clave);
 
-                db.TblUsuarios.Add(tblusuario);                
+                db.TblUsuarios.Add(tblusuario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IDEmpleado = new SelectList(db.TblEmpleados, "IDEmpleado", "Nombre", tblusuario.IDEmpleado);
             return View(tblusuario);
         }
 
@@ -91,6 +104,9 @@ namespace Presupuestos.Controllers
             if (user == null)
                 return Redirect("~/Default");
 
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -100,8 +116,7 @@ namespace Presupuestos.Controllers
             {
                 return HttpNotFound();
             }
-
-            tblusuario.Clave = String.Empty;
+            ViewBag.IDEmpleado = new SelectList(db.TblEmpleados, "IDEmpleado", "Nombre", tblusuario.IDEmpleado);
             return View(tblusuario);
         }
 
@@ -110,12 +125,15 @@ namespace Presupuestos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="IDUsuario,Nombre,NombreCuenta,Clave,Active")] TblUsuario tblusuario)
+        public ActionResult Edit([Bind(Include="IDUsuario,Nombre,NombreCuenta,Clave,Active,Tipo,IDEmpleado")] TblUsuario tblusuario)
         {
             var user = Session["User"] as mUsuario;
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             if (ModelState.IsValid)
             {
@@ -125,6 +143,7 @@ namespace Presupuestos.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IDEmpleado = new SelectList(db.TblEmpleados, "IDEmpleado", "Nombre", tblusuario.IDEmpleado);
             return View(tblusuario);
         }
 
@@ -135,6 +154,9 @@ namespace Presupuestos.Controllers
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             if (id == null)
             {
@@ -157,6 +179,9 @@ namespace Presupuestos.Controllers
 
             if (user == null)
                 return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
 
             TblUsuario tblusuario = db.TblUsuarios.Find(id);
             db.TblUsuarios.Remove(tblusuario);

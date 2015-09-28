@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Presupuestos.Models;
+using Presupuestos.Comun;
 
 namespace Presupuestos.Controllers
 {
@@ -17,12 +18,28 @@ namespace Presupuestos.Controllers
         // GET: /Puestos/
         public ActionResult Index()
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             return View(db.TblPuestos.ToList());
         }
 
         // GET: /Puestos/Details/5
         public ActionResult Details(int? id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +55,14 @@ namespace Presupuestos.Controllers
         // GET: /Puestos/Create
         public ActionResult Create()
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             return View();
         }
 
@@ -48,6 +73,14 @@ namespace Presupuestos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="IDPuesto,Descripcion")] TblPuesto tblpuesto)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (ModelState.IsValid)
             {
                 db.TblPuestos.Add(tblpuesto);
@@ -61,6 +94,14 @@ namespace Presupuestos.Controllers
         // GET: /Puestos/Edit/5
         public ActionResult Edit(int? id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +121,14 @@ namespace Presupuestos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="IDPuesto,Descripcion")] TblPuesto tblpuesto)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (ModelState.IsValid)
             {
                 db.Entry(tblpuesto).State = EntityState.Modified;
@@ -92,6 +141,14 @@ namespace Presupuestos.Controllers
         // GET: /Puestos/Delete/5
         public ActionResult Delete(int? id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +166,14 @@ namespace Presupuestos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             TblPuesto tblpuesto = db.TblPuestos.Find(id);
             db.TblPuestos.Remove(tblpuesto);
             db.SaveChanges();

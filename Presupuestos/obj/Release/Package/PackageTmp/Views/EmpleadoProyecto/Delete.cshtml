@@ -29,6 +29,14 @@
             @Html.DisplayFor(model => model.TblProyecto.Nombre)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Pagado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pagado)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {
@@ -36,7 +44,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Eliminar", "Index")
+            @Html.ActionLink("Regresar a la Lista", "Index")
         </div>
     }
 </div>

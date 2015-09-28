@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Presupuestos.Models;
+using Presupuestos.Comun;
 
 namespace Presupuestos.Controllers
 {
@@ -17,12 +18,28 @@ namespace Presupuestos.Controllers
         // GET: /Estatus/
         public ActionResult Index()
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             return View(db.TblEstatus.ToList());
         }
 
         // GET: /Estatus/Details/5
         public ActionResult Details(int? id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +55,14 @@ namespace Presupuestos.Controllers
         // GET: /Estatus/Create
         public ActionResult Create()
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             return View();
         }
 
@@ -48,6 +73,14 @@ namespace Presupuestos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="IDEstatus,Descripcion")] TblEstatu tblestatu)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (ModelState.IsValid)
             {
                 db.TblEstatus.Add(tblestatu);
@@ -61,6 +94,14 @@ namespace Presupuestos.Controllers
         // GET: /Estatus/Edit/5
         public ActionResult Edit(int? id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +121,14 @@ namespace Presupuestos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="IDEstatus,Descripcion")] TblEstatu tblestatu)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (ModelState.IsValid)
             {
                 db.Entry(tblestatu).State = EntityState.Modified;
@@ -92,6 +141,14 @@ namespace Presupuestos.Controllers
         // GET: /Estatus/Delete/5
         public ActionResult Delete(int? id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +166,14 @@ namespace Presupuestos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var user = Session["User"] as mUsuario;
+
+            if (user == null)
+                return Redirect("~/Default");
+
+            if (user.Tipo.Equals(2))
+                return Redirect("~/Presentacion/FrmHomeEmpleados.aspx"); 
+
             TblEstatu tblestatu = db.TblEstatus.Find(id);
             db.TblEstatus.Remove(tblestatu);
             db.SaveChanges();

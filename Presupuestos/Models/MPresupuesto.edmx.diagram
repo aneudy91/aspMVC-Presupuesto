@@ -6,13 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="802a8ff030bc4c58bcf2a67e7039ad03" Name="Diagram1">
         <EntityTypeShape EntityType="dbPresupuestosModel.TblEmpresa" Width="1.5" PointX="2.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbPresupuestosModel.TblUsuario" Width="1.5" PointX="5.625" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPresupuestosModel.TblUsuario" Width="1.5" PointX="5" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="dbPresupuestosModel.TblCliente" Width="1.5" PointX="3.125" PointY="5.125" />
         <EntityTypeShape EntityType="dbPresupuestosModel.TblEmpleado" Width="1.5" PointX="5.75" PointY="3.875" />
         <EntityTypeShape EntityType="dbPresupuestosModel.TblConcepto" Width="1.5" PointX="7.75" PointY="2.25" />
         <EntityTypeShape EntityType="dbPresupuestosModel.TblProyecto" Width="1.5" PointX="6.625" PointY="6.625" />
         <AssociationConnector Association="dbPresupuestosModel.fk_TblProyectos_IDCliente" />
-        <EntityTypeShape EntityType="dbPresupuestosModel.TblProyectosEmpleado" Width="2" PointX="9.625" PointY="4.375" />
+        <EntityTypeShape EntityType="dbPresupuestosModel.TblProyectosEmpleado" Width="2" PointX="9.625" PointY="4.125" />
         <AssociationConnector Association="dbPresupuestosModel.fk_TblProyectosEmpleados_IDEmpleado" />
         <AssociationConnector Association="dbPresupuestosModel.fk_TblProyectosEmpleados_IDProyecto" />
         <EntityTypeShape EntityType="dbPresupuestosModel.TblEstatu" Width="1.5" PointX="0.75" PointY="5.75" />
@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="dbPresupuestosModel.TblPuesto" Width="1.5" PointX="0.75" PointY="8.5" />
         <AssociationConnector Association="dbPresupuestosModel.Fk_TblEmpleados_IDPuesto" />
         <EntityTypeShape EntityType="dbPresupuestosModel.tblListaConfig" Width="1.5" PointX="3.375" PointY="8.75" />
+        <AssociationConnector Association="dbPresupuestosModel.fk_TblUsuarios_IDEmpleado" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -19,5 +19,9 @@ namespace Presupuestos.Models
         public string NombreCuenta { get; set; }
         public string Clave { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<int> Tipo { get; set; }
+        public Nullable<int> IDEmpleado { get; set; }
+    
+        public virtual TblEmpleado TblEmpleado { get; set; }
     }
 }

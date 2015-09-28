@@ -26,6 +26,9 @@
     <Property Name="NombreCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Clave" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Active" Type="Boolean" />
+    <Property Name="Tipo" Type="Int32" />
+    <Property Name="IDEmpleado" Type="Int32" />
+    <NavigationProperty Name="TblEmpleado" Relationship="dbPresupuestosModel.fk_TblUsuarios_IDEmpleado" FromRole="TblUsuario" ToRole="TblEmpleado" />
   </EntityType>
   <EntityContainer Name="dbPresupuestosEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="TblEmpresas" EntityType="Self.TblEmpresa" />
@@ -64,6 +67,10 @@
       <End Role="TblEmpleado" EntitySet="TblEmpleados" />
     </AssociationSet>
     <EntitySet Name="tblListaConfigs" EntityType="dbPresupuestosModel.tblListaConfig" />
+    <AssociationSet Name="fk_TblUsuarios_IDEmpleado" Association="dbPresupuestosModel.fk_TblUsuarios_IDEmpleado">
+      <End Role="TblEmpleado" EntitySet="TblEmpleados" />
+      <End Role="TblUsuario" EntitySet="TblUsuarios" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="TblCliente">
     <Key>
@@ -87,6 +94,7 @@
     <NavigationProperty Name="TblProyectosEmpleados" Relationship="dbPresupuestosModel.fk_TblProyectosEmpleados_IDEmpleado" FromRole="TblEmpleado" ToRole="TblProyectosEmpleado" />
     <Property Name="IDPuesto" Type="Int32" />
     <NavigationProperty Name="TblPuesto" Relationship="dbPresupuestosModel.Fk_TblEmpleados_IDPuesto" FromRole="TblEmpleado" ToRole="TblPuesto" />
+    <NavigationProperty Name="TblUsuarios" Relationship="dbPresupuestosModel.fk_TblUsuarios_IDEmpleado" FromRole="TblEmpleado" ToRole="TblUsuario" />
   </EntityType>
   <EntityType Name="TblConcepto">
     <Key>
@@ -136,6 +144,7 @@
     <Property Name="IDEmpleado" Type="Int32" />
     <NavigationProperty Name="TblEmpleado" Relationship="dbPresupuestosModel.fk_TblProyectosEmpleados_IDEmpleado" FromRole="TblProyectosEmpleado" ToRole="TblEmpleado" />
     <NavigationProperty Name="TblProyecto" Relationship="dbPresupuestosModel.fk_TblProyectosEmpleados_IDProyecto" FromRole="TblProyectosEmpleado" ToRole="TblProyecto" />
+    <Property Name="Pagado" Type="Boolean" />
   </EntityType>
   <Association Name="fk_TblProyectosEmpleados_IDEmpleado">
     <End Type="dbPresupuestosModel.TblEmpleado" Role="TblEmpleado" Multiplicity="0..1">
@@ -213,4 +222,18 @@
     <Property Name="Valor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
   </EntityType>
+  <Association Name="fk_TblUsuarios_IDEmpleado">
+    <End Type="dbPresupuestosModel.TblEmpleado" Role="TblEmpleado" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbPresupuestosModel.TblUsuario" Role="TblUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblEmpleado">
+        <PropertyRef Name="IDEmpleado" />
+      </Principal>
+      <Dependent Role="TblUsuario">
+        <PropertyRef Name="IDEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

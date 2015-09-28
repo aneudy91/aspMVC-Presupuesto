@@ -81,6 +81,7 @@
     <Property Name="IDProyectoEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDProyecto" Type="int" />
     <Property Name="IDEmpleado" Type="int" />
+    <Property Name="Pagado" Type="bit" />
   </EntityType>
   <EntityType Name="TblPuestos">
     <Key>
@@ -98,6 +99,8 @@
     <Property Name="NombreCuenta" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Clave" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Active" Type="bit" />
+    <Property Name="Tipo" Type="int" />
+    <Property Name="IDEmpleado" Type="int" />
   </EntityType>
   <Association Name="Fk_TblEmpleados_IDPuesto">
     <End Role="TblPuestos" Type="Self.TblPuestos" Multiplicity="0..1" />
@@ -165,6 +168,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_TblUsuarios_IDEmpleado">
+    <End Role="TblEmpleados" Type="Self.TblEmpleados" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TblUsuarios" Type="Self.TblUsuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblEmpleados">
+        <PropertyRef Name="IDEmpleado" />
+      </Principal>
+      <Dependent Role="TblUsuarios">
+        <PropertyRef Name="IDEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="spCalculoProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IDProyecto" Type="int" Mode="In" />
   </Function>
@@ -201,6 +218,10 @@
     <AssociationSet Name="fk_TblProyectosEmpleados_IDProyecto" Association="Self.fk_TblProyectosEmpleados_IDProyecto">
       <End Role="TblProyectos" EntitySet="TblProyectos" />
       <End Role="TblProyectosEmpleados" EntitySet="TblProyectosEmpleados" />
+    </AssociationSet>
+    <AssociationSet Name="fk_TblUsuarios_IDEmpleado" Association="Self.fk_TblUsuarios_IDEmpleado">
+      <End Role="TblEmpleados" EntitySet="TblEmpleados" />
+      <End Role="TblUsuarios" EntitySet="TblUsuarios" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
