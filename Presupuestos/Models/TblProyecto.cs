@@ -27,6 +27,7 @@ namespace Presupuestos.Models
         public Nullable<System.DateTime> FechaFin { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IDEstatus { get; set; }
+        public Nullable<bool> Cobrado { get; set; }
     
         public virtual TblCliente TblCliente { get; set; }
         public virtual ICollection<TblProyectosEmpleado> TblProyectosEmpleados { get; set; }

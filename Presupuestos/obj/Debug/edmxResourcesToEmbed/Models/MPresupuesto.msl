@@ -46,6 +46,7 @@
     <EntitySetMapping Name="TblEmpleados">
       <EntityTypeMapping TypeName="dbPresupuestosModel.TblEmpleado">
         <MappingFragment StoreEntitySet="TblEmpleados">
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
           <ScalarProperty Name="IDPuesto" ColumnName="IDPuesto" />
           <ScalarProperty Name="Materno" ColumnName="Materno" />
           <ScalarProperty Name="Paterno" ColumnName="Paterno" />
@@ -67,6 +68,7 @@
     <EntitySetMapping Name="TblProyectos">
       <EntityTypeMapping TypeName="dbPresupuestosModel.TblProyecto">
         <MappingFragment StoreEntitySet="TblProyectos">
+          <ScalarProperty Name="Cobrado" ColumnName="Cobrado" />
           <ScalarProperty Name="IDEstatus" ColumnName="IDEstatus" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />

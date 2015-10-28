@@ -28,6 +28,7 @@
     <Property Name="Paterno" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Materno" Type="varchar" MaxLength="60" />
     <Property Name="IDPuesto" Type="int" />
+    <Property Name="Correo" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="TblEmpresa">
     <Key>
@@ -73,6 +74,7 @@
     <Property Name="FechaFin" Type="date" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IDEstatus" Type="int" />
+    <Property Name="Cobrado" Type="bit" />
   </EntityType>
   <EntityType Name="TblProyectosEmpleados">
     <Key>

@@ -95,6 +95,7 @@
     <Property Name="IDPuesto" Type="Int32" />
     <NavigationProperty Name="TblPuesto" Relationship="dbPresupuestosModel.Fk_TblEmpleados_IDPuesto" FromRole="TblEmpleado" ToRole="TblPuesto" />
     <NavigationProperty Name="TblUsuarios" Relationship="dbPresupuestosModel.fk_TblUsuarios_IDEmpleado" FromRole="TblEmpleado" ToRole="TblUsuario" />
+    <Property Name="Correo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="TblConcepto">
     <Key>

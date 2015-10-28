@@ -53,6 +53,8 @@ CREATE TABLE TblEmpleados(
 	,Paterno varchar(100) not null
 	,Materno varchar(60) null
 	,IDPuesto int CONSTRAINT Fk_TblEmpleados_IDPuesto foreign key references TblPuestos(IDPuesto)	
+	,Correo varchar(255) 
+	--,alter table TblEmpleados add Correo varchar(255) 
 );
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblUsuarios]') AND type in (N'U'))
@@ -98,6 +100,7 @@ CREATE TABLE TblProyectos(
 	,FechaFin date
 	,Activo bit default 1
 	,IDEstatus int CONSTRAINT fk_TblProyectos_IDEstatus FOREIGN KEY REFERENCES TblEstatus(IDEstatus)
+	,alter table TblProyectos add Cobrado bit default 0
 );
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblProyectosEmpleados]') AND type in (N'U'))

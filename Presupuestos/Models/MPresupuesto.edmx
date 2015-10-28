@@ -33,6 +33,7 @@
           <Property Name="Paterno" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Materno" Type="varchar" MaxLength="60" />
           <Property Name="IDPuesto" Type="int" />
+          <Property Name="Correo" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="TblEmpresa">
           <Key>
@@ -78,6 +79,7 @@
           <Property Name="FechaFin" Type="date" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IDEstatus" Type="int" />
+          <Property Name="Cobrado" Type="bit" />
         </EntityType>
         <EntityType Name="TblProyectosEmpleados">
           <Key>
@@ -328,6 +330,7 @@
           <Property Name="IDPuesto" Type="Int32" />
           <NavigationProperty Name="TblPuesto" Relationship="dbPresupuestosModel.Fk_TblEmpleados_IDPuesto" FromRole="TblEmpleado" ToRole="TblPuesto" />
           <NavigationProperty Name="TblUsuarios" Relationship="dbPresupuestosModel.fk_TblUsuarios_IDEmpleado" FromRole="TblEmpleado" ToRole="TblUsuario" />
+          <Property Name="Correo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TblConcepto">
           <Key>
@@ -353,6 +356,7 @@
           <NavigationProperty Name="TblProyectosEmpleados" Relationship="dbPresupuestosModel.fk_TblProyectosEmpleados_IDProyecto" FromRole="TblProyecto" ToRole="TblProyectosEmpleado" />
           <Property Name="IDEstatus" Type="Int32" />
           <NavigationProperty Name="TblEstatu" Relationship="dbPresupuestosModel.fk_TblProyectos_IDEstatus" FromRole="TblProyecto" ToRole="TblEstatu" />
+          <Property Name="Cobrado" Type="Boolean" />
         </EntityType>
         <Association Name="fk_TblProyectos_IDCliente">
           <End Type="dbPresupuestosModel.TblCliente" Role="TblCliente" Multiplicity="0..1">
@@ -520,6 +524,7 @@
           <EntitySetMapping Name="TblEmpleados">
             <EntityTypeMapping TypeName="dbPresupuestosModel.TblEmpleado">
               <MappingFragment StoreEntitySet="TblEmpleados">
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="IDPuesto" ColumnName="IDPuesto" />
                 <ScalarProperty Name="Materno" ColumnName="Materno" />
                 <ScalarProperty Name="Paterno" ColumnName="Paterno" />
@@ -541,6 +546,7 @@
           <EntitySetMapping Name="TblProyectos">
             <EntityTypeMapping TypeName="dbPresupuestosModel.TblProyecto">
               <MappingFragment StoreEntitySet="TblProyectos">
+                <ScalarProperty Name="Cobrado" ColumnName="Cobrado" />
                 <ScalarProperty Name="IDEstatus" ColumnName="IDEstatus" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />

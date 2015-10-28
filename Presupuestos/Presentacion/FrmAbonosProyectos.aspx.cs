@@ -17,6 +17,9 @@ namespace Presupuestos.Presentacion
         Proyecto p;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            Response.Redirect("~/Presentacion/FrmCerrarSession.aspx");
+
             var user = Session["User"] as mUsuario;
 
             if (user == null)

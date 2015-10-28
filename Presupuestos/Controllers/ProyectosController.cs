@@ -74,7 +74,7 @@ namespace Presupuestos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="IDProyecto,IDCliente,Nombre,Decripcion,FechaInicio,FechaFin,Activo,IDEstatus")] TblProyecto tblproyecto)
+        public ActionResult Create([Bind(Include = "IDProyecto,IDCliente,Nombre,Decripcion,FechaInicio,FechaFin,Activo,IDEstatus,Cobrado")] TblProyecto tblproyecto)
         {
             var user = Session["User"] as mUsuario;
 
@@ -127,7 +127,7 @@ namespace Presupuestos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="IDProyecto,IDCliente,Nombre,Decripcion,FechaInicio,FechaFin,Activo,IDEstatus")] TblProyecto tblproyecto)
+        public ActionResult Edit([Bind(Include = "IDProyecto,IDCliente,Nombre,Decripcion,FechaInicio,FechaFin,Activo,IDEstatus,Cobrado")] TblProyecto tblproyecto)
         {
             var user = Session["User"] as mUsuario;
 

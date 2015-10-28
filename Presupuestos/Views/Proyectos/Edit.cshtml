@@ -78,6 +78,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Cobrado, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cobrado)
+                @Html.ValidationMessageFor(model => model.Cobrado)
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
@@ -95,7 +103,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#FechaInicio").datepicker({ dateFormat: "dd/mm/yy" }).val();
-        $("#FechaFin").datepicker({ dateFormat: "dd/mm/yy" }).val();
+        $("#FechaInicio").datepicker({ dateFormat: "mm/dd/yy" }).val();
+        $("#FechaFin").datepicker({ dateFormat: "mm/dd/yy" }).val();
     });
 </script>

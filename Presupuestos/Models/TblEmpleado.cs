@@ -25,6 +25,7 @@ namespace Presupuestos.Models
         public string Paterno { get; set; }
         public string Materno { get; set; }
         public Nullable<int> IDPuesto { get; set; }
+        public string Correo { get; set; }
     
         public virtual ICollection<TblProyectosEmpleado> TblProyectosEmpleados { get; set; }
         public virtual TblPuesto TblPuesto { get; set; }
